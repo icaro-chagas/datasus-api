@@ -2,9 +2,17 @@ from django.contrib import admin
 from django.urls import path
 from datasus_api.views import views_cnes
 from datasus_api.views import views_siasus
+from datasus_api.views import views_cih
+from datasus_api.views import views_ciha
+from datasus_api.views import views_pce
+from datasus_api.views import views_po
 from rest_framework.urlpatterns import format_suffix_patterns
 
 urlpatterns = [
+    path('cih/cr', views_cih.handle_request_cr),
+    path('ciha', views_ciha.handle_request_ciha),
+    path('pce', views_pce.handle_request_pce),
+    path('po', views_po.handle_request_po),
     path('cnes/dc', views_cnes.handle_request_dc),
     path('cnes/ee', views_cnes.handle_request_ee),
     path('cnes/ef', views_cnes.handle_request_ef),

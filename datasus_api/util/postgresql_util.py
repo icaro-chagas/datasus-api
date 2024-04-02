@@ -122,12 +122,15 @@ class PostgresDbOperations():
         self.__execute_command(command, OperationType.INSERT_ROWS, rows, query_metadata)
 
 
-    def insert_file(self, filename, prefix, uf, year, month):
+    def insert_file(self, filename, prefix, uf, year, month=''):
+
         print('\nLendo o arquivo...')
         df = pd.read_csv(f'{STORAGE_PATH}{filename}.csv.gz', compression='gzip', low_memory=False)
         df['UF'] = uf
         df['ANO'] = year
-        df['MES'] = month
+
+        if month:
+            df['MES'] = month
 
         db_column_names = [col.upper() for col in self.get_column_names()]
         db_column_names.remove('ID')
