@@ -5,10 +5,12 @@ from ..models.siasus.ad import ADSiasus
 from ..models.siasus.am import AMSiasus
 from ..models.siasus.an import ANSiasus
 from ..models.siasus.aq import AQSiasus
+from ..models.siasus.ar import ARSiasus
+from ..models.siasus.atd import ATDSiasus
 from ..models.siasus.pa import PASiasus
 from ..models.file_metadata import FileMetadata
-from ..serializers.serializers_siasus import ABSerializer, ABOSerializer, ACFSerializer, ADSerializer, PASerializer
-from ..serializers.serializers_siasus import AMSerializer, ANSerializer, AQSerializer
+from ..serializers.serializers_siasus import ABSerializer, ABOSerializer, ACFSerializer, ADSerializer, AMSerializer
+from ..serializers.serializers_siasus import ANSerializer, AQSerializer, ARSerializer, ATDSerializer, PASerializer
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
@@ -25,6 +27,8 @@ TABLE_NAMES = {
     'AM': 'am_siasus',
     'AN': 'an_siasus',
     'AQ': 'aq_siasus',
+    'AR': 'ar_siasus',
+    'ATD': 'atd_siasus',
     'PA': 'pa_siasus'
 }
 
@@ -36,6 +40,8 @@ MODELS = {
     'AM': AMSiasus,
     'AN': ANSiasus,
     'AQ': AQSiasus,
+    'AR': ARSiasus,
+    'ATD': ATDSiasus,
     'PA': PASiasus
 }
 
@@ -47,6 +53,8 @@ SERIALIZERS = {
     'AM': AMSerializer,
     'AN': ANSerializer,
     'AQ': AQSerializer,
+    'AR': ARSerializer,
+    'ATD': ATDSerializer,
     'PA': PASerializer
 }
 
@@ -81,6 +89,14 @@ def handle_request_an(request, format=None):
 @api_view(['GET', 'POST', 'DELETE'])
 def handle_request_aq(request, format=None):
     return handle_request(request, 'AQ', format)
+
+@api_view(['GET', 'POST', 'DELETE'])
+def handle_request_ar(request, format=None):
+    return handle_request(request, 'AR', format)
+
+@api_view(['GET', 'POST', 'DELETE'])
+def handle_request_atd(request, format=None):
+    return handle_request(request, 'ATD', format)
 
 
 def handle_request(request, prefix, format=None):

@@ -34,6 +34,8 @@ urlpatterns = [
     path('siasus/am', views_siasus.handle_request_am),
     path('siasus/an', views_siasus.handle_request_an),
     path('siasus/aq', views_siasus.handle_request_aq),
+    path('siasus/ar', views_siasus.handle_request_ar),
+    path('siasus/atd', views_siasus.handle_request_atd),
     path('siasus/pa', views_siasus.handle_request_pa),
 ]
 
