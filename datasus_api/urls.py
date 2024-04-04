@@ -28,6 +28,8 @@ urlpatterns = [
     path('po', views_po.handle_request_po),
     path('resp', views_resp.handle_request_resp),
     path('siasus/ab', views_siasus.handle_request_ab),
+    path('siasus/abo', views_siasus.handle_request_abo),
+    path('siasus/acf', views_siasus.handle_request_acf),
     path('siasus/pa', views_siasus.handle_request_pa),
 ]
 

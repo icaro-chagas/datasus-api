@@ -1,7 +1,9 @@
 from ..models.siasus.ab import ABSiasus
+from ..models.siasus.abo import ABOSiasus
+from ..models.siasus.acf import ACFSiasus
 from ..models.siasus.pa import PASiasus
 from ..models.file_metadata import FileMetadata
-from ..serializers.serializers_siasus import ABSerializer, PASerializer
+from ..serializers.serializers_siasus import ABSerializer, ABOSerializer, ACFSerializer, PASerializer
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
@@ -12,16 +14,22 @@ MAX_ROWS_PER_PAGE = 200000
 
 TABLE_NAMES = {
     'AB': 'ab_siasus',
+    'ABO': 'abo_siasus',
+    'ACF': 'acf_siasus',
     'PA': 'pa_siasus'
 }
 
 MODELS = {
     'AB': ABSiasus,
+    'ABO': ABOSiasus,
+    'ACF': ACFSiasus,
     'PA': PASiasus
 }
 
 SERIALIZERS = {
     'AB': ABSerializer,
+    'ABO': ABOSerializer,
+    'ACF': ACFSerializer,
     'PA': PASerializer
 }
 
@@ -32,6 +40,15 @@ def handle_request_pa(request, format=None):
 @api_view(['GET', 'POST', 'DELETE'])
 def handle_request_ab(request, format=None):
     return handle_request(request, 'AB', format)
+
+@api_view(['GET', 'POST', 'DELETE'])
+def handle_request_abo(request, format=None):
+    return handle_request(request, 'ABO', format)
+
+
+@api_view(['GET', 'POST', 'DELETE'])
+def handle_request_acf(request, format=None):
+    return handle_request(request, 'ACF', format)
 
 
 def handle_request(request, prefix, format=None):
