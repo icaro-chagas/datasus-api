@@ -5,6 +5,7 @@ from ..models.siasus.acf import ACFSiasus
 from ..models.siasus.ad import ADSiasus
 from ..models.siasus.am import AMSiasus
 from ..models.siasus.an import ANSiasus
+from ..models.siasus.aq import AQSiasus
 from ..models.siasus.pa import PASiasus
 
 
@@ -96,3 +97,19 @@ class ANSerializer(serializers.ModelSerializer):
            'ap_dtaut', 'ap_cidcas', 'ap_cidpri', 'ap_cidsec', 'ap_etnia', 'an_dtpdr', 'an_altura', 'an_peso', 'an_diures',
            'an_glicos', 'an_acevas', 'an_ulsoab', 'an_tru', 'an_intfis', 'an_cncdo', 'an_albumi', 'an_hcv', 'an_hbsag',
            'an_hiv', 'an_hb', 'uf', 'ano', 'mes']
+        
+
+
+class AQSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = AQSiasus
+        fields = ['ap_mvm', 'ap_condic', 'ap_gestao', 'ap_coduni', 'ap_autoriz', 'ap_cmp', 'ap_pripal', 'ap_vl_ap',
+           'ap_ufmun', 'ap_tpups', 'ap_tippre', 'ap_mn_ind', 'ap_cnpjcpf', 'ap_cnpjmnt', 'ap_cnspcn', 'ap_coidade',
+           'ap_nuidade', 'ap_sexo', 'ap_racacor', 'ap_munpcn', 'ap_ufnacio', 'ap_ceppcn', 'ap_ufdif', 'ap_mndif',
+           'ap_dtinic', 'ap_dtfim', 'ap_tpaten', 'ap_tpapac', 'ap_motsai', 'ap_obito', 'ap_encerr', 'ap_perman',
+           'ap_alta', 'ap_transf', 'ap_dtocor', 'ap_codemi', 'ap_catend', 'ap_apacant', 'ap_unisol', 'ap_dtsolic',
+           'ap_dtaut', 'ap_cidcas', 'ap_cidpri', 'ap_cidsec', 'ap_etnia', 'aq_cid10', 'aq_linfin', 'aq_estadi',
+           'aq_grahis', 'aq_dtiden', 'aq_trante', 'aq_cidini1', 'aq_dtini1', 'aq_cidini2', 'aq_dtini2', 'aq_cidini3',
+           'aq_dtini3', 'aq_conttr', 'aq_dtintr', 'aq_esqu_p1', 'aq_totmpl', 'aq_totmau', 'aq_esqu_p2', 'aq_med01',
+           'aq_med02', 'aq_med03', 'aq_med04', 'aq_med05', 'aq_med06', 'aq_med07', 'aq_med08', 'aq_med09', 'aq_med10',
+           'ap_natjur', 'uf', 'ano', 'mes']
