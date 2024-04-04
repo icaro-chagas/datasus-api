@@ -1,8 +1,7 @@
-from django.http import JsonResponse
-from django.core.paginator import Paginator
+from ..models.siasus.ab import ABSiasus
 from ..models.siasus.pa import PASiasus
 from ..models.file_metadata import FileMetadata
-from ..serializers.serializers_siasus import PASerializer
+from ..serializers.serializers_siasus import ABSerializer, PASerializer
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
@@ -12,20 +11,27 @@ from ..util.datasus_util import download_file
 MAX_ROWS_PER_PAGE = 200000
 
 TABLE_NAMES = {
+    'AB': 'ab_siasus',
     'PA': 'pa_siasus'
 }
 
 MODELS = {
+    'AB': ABSiasus,
     'PA': PASiasus
 }
 
 SERIALIZERS = {
+    'AB': ABSerializer,
     'PA': PASerializer
 }
 
 @api_view(['GET', 'POST', 'DELETE'])
 def handle_request_pa(request, format=None):
     return handle_request(request, 'PA', format)
+
+@api_view(['GET', 'POST', 'DELETE'])
+def handle_request_ab(request, format=None):
+    return handle_request(request, 'AB', format)
 
 
 def handle_request(request, prefix, format=None):
@@ -58,8 +64,13 @@ def insert(request, prefix, format=None):
     if filename in inserted_files:
         return Response({'message': f'The {filename} file has already been inserted'}, status=status.HTTP_409_CONFLICT)
     
+    if int(full_year) > 2007:
+        base_name = 'SIASUS1'
+    else:
+        base_name = 'SIASUS2'
+
     try:
-        download_file('SIASUS', filename, prefix)
+        download_file(base_name, filename, prefix)
         dbo.insert_file(filename, prefix, uf, full_year, month)
 
     except Exception as e:

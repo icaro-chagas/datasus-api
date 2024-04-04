@@ -27,6 +27,7 @@ urlpatterns = [
     path('pce', views_pce.handle_request_pce),
     path('po', views_po.handle_request_po),
     path('resp', views_resp.handle_request_resp),
+    path('siasus/ab', views_siasus.handle_request_ab),
     path('siasus/pa', views_siasus.handle_request_pa),
 ]
 
