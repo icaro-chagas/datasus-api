@@ -51,6 +51,9 @@ def get_ftp_connection(base_name, filename_prefix):
     elif base_name == 'PCE':
         ftp_path = 'dissemin/publicos/PCE/DADOS'
 
+    elif base_name == 'RESP':
+        ftp_path = 'dissemin/publicos/RESP/DADOS'
+
     elif base_name == 'SIASUS' or base_name == 'SIHSUS':
         ftp_path = f'dissemin/publicos/{base_name}/200801_/Dados'
 
