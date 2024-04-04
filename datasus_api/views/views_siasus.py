@@ -1,9 +1,13 @@
 from ..models.siasus.ab import ABSiasus
 from ..models.siasus.abo import ABOSiasus
 from ..models.siasus.acf import ACFSiasus
+from ..models.siasus.ad import ADSiasus
+from ..models.siasus.am import AMSiasus
+from ..models.siasus.an import ANSiasus
 from ..models.siasus.pa import PASiasus
 from ..models.file_metadata import FileMetadata
-from ..serializers.serializers_siasus import ABSerializer, ABOSerializer, ACFSerializer, PASerializer
+from ..serializers.serializers_siasus import ABSerializer, ABOSerializer, ACFSerializer, ADSerializer, PASerializer
+from ..serializers.serializers_siasus import AMSerializer, ANSerializer
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
@@ -16,6 +20,9 @@ TABLE_NAMES = {
     'AB': 'ab_siasus',
     'ABO': 'abo_siasus',
     'ACF': 'acf_siasus',
+    'AD': 'ad_siasus',
+    'AM': 'am_siasus',
+    'AN': 'an_siasus',
     'PA': 'pa_siasus'
 }
 
@@ -23,6 +30,9 @@ MODELS = {
     'AB': ABSiasus,
     'ABO': ABOSiasus,
     'ACF': ACFSiasus,
+    'AD': ADSiasus,
+    'AM': AMSiasus,
+    'AN': ANSiasus,
     'PA': PASiasus
 }
 
@@ -30,6 +40,9 @@ SERIALIZERS = {
     'AB': ABSerializer,
     'ABO': ABOSerializer,
     'ACF': ACFSerializer,
+    'AD': ADSerializer,
+    'AM': AMSerializer,
+    'AN': ANSerializer,
     'PA': PASerializer
 }
 
@@ -45,10 +58,21 @@ def handle_request_ab(request, format=None):
 def handle_request_abo(request, format=None):
     return handle_request(request, 'ABO', format)
 
-
 @api_view(['GET', 'POST', 'DELETE'])
 def handle_request_acf(request, format=None):
     return handle_request(request, 'ACF', format)
+
+@api_view(['GET', 'POST', 'DELETE'])
+def handle_request_ad(request, format=None):
+    return handle_request(request, 'AD', format)
+
+@api_view(['GET', 'POST', 'DELETE'])
+def handle_request_am(request, format=None):
+    return handle_request(request, 'AM', format)
+
+@api_view(['GET', 'POST', 'DELETE'])
+def handle_request_an(request, format=None):
+    return handle_request(request, 'AN', format)
 
 
 def handle_request(request, prefix, format=None):

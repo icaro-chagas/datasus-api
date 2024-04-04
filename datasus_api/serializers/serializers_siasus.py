@@ -2,6 +2,9 @@ from rest_framework import serializers
 from ..models.siasus.ab import ABSiasus
 from ..models.siasus.abo import ABOSiasus
 from ..models.siasus.acf import ACFSiasus
+from ..models.siasus.ad import ADSiasus
+from ..models.siasus.am import AMSiasus
+from ..models.siasus.an import ANSiasus
 from ..models.siasus.pa import PASiasus
 
 
@@ -57,3 +60,39 @@ class ACFSerializer(serializers.ModelSerializer):
                   'ap_dtaut', 'ap_cidcas', 'ap_cidpri', 'ap_cidsec', 'ap_etnia', 'acf_duplex', 'acf_usocat', 'acf_prefav',
                   'acf_flebit', 'acf_hemato', 'acf_veiavi', 'acf_pulso', 'acf_veidia', 'acf_artdia', 'acf_fremit',
                   'ap_natjur', 'uf', 'ano', 'mes']
+        
+
+class ADSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ADSiasus
+        fields = ['ap_mvm', 'ap_condic', 'ap_gestao', 'ap_coduni', 'ap_autoriz', 'ap_cmp', 'ap_pripal', 'ap_vl_ap', 'ap_ufmun',
+           'ap_tpups', 'ap_tippre', 'ap_mn_ind', 'ap_cnpjcpf', 'ap_cnpjmnt', 'ap_cnspcn', 'ap_coidade', 'ap_nuidade',
+           'ap_sexo', 'ap_racacor', 'ap_munpcn', 'ap_ufnacio', 'ap_ceppcn', 'ap_ufdif', 'ap_mndif', 'ap_dtinic', 'ap_dtfim',
+           'ap_tpaten', 'ap_tpapac', 'ap_motsai', 'ap_obito', 'ap_encerr', 'ap_perman', 'ap_alta', 'ap_transf', 'ap_dtocor',
+           'ap_codemi', 'ap_catend', 'ap_apacant', 'ap_unisol', 'ap_dtsolic', 'ap_dtaut', 'ap_cidcas', 'ap_cidpri', 'ap_cidsec',
+           'ap_etnia', 'ap_natjur', 'uf', 'ano', 'mes']
+        
+
+class AMSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = AMSiasus
+        fields = ['ap_mvm', 'ap_condic', 'ap_gestao', 'ap_coduni', 'ap_autoriz', 'ap_cmp', 'ap_pripal', 'ap_vl_ap',
+           'ap_ufmun', 'ap_tpups', 'ap_tippre', 'ap_mn_ind', 'ap_cnpjcpf', 'ap_cnpjmnt', 'ap_cnspcn', 'ap_coidade',
+           'ap_nuidade', 'ap_sexo', 'ap_racacor', 'ap_munpcn', 'ap_ufnacio', 'ap_ceppcn', 'ap_ufdif', 'ap_mndif',
+           'ap_dtinic', 'ap_dtfim', 'ap_tpaten', 'ap_tpapac', 'ap_motsai', 'ap_obito', 'ap_encerr', 'ap_perman',
+           'ap_alta', 'ap_transf', 'ap_dtocor', 'ap_codemi', 'ap_catend', 'ap_apacant', 'ap_unisol', 'ap_dtsolic',
+           'ap_dtaut', 'ap_cidcas', 'ap_cidpri', 'ap_cidsec', 'ap_etnia', 'am_peso', 'am_altura', 'am_transpl',
+           'am_qtdtran', 'am_gestant', 'ap_natjur', 'uf', 'ano', 'mes']
+
+
+class ANSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ANSiasus
+        fields = ['ap_mvm', 'ap_condic', 'ap_gestao', 'ap_coduni', 'ap_autoriz', 'ap_cmp', 'ap_pripal', 'ap_vl_ap',
+           'ap_ufmun', 'ap_tpups', 'ap_tippre', 'ap_mn_ind', 'ap_cnpjcpf', 'ap_cnpjmnt', 'ap_cnspcn', 'ap_coidade',
+           'ap_nuidade', 'ap_sexo', 'ap_racacor', 'ap_munpcn', 'ap_ufnacio', 'ap_ceppcn', 'ap_ufdif', 'ap_mndif',
+           'ap_dtinic', 'ap_dtfim', 'ap_tpaten', 'ap_tpapac', 'ap_motsai', 'ap_obito', 'ap_encerr', 'ap_perman',
+           'ap_alta', 'ap_transf', 'ap_dtocor', 'ap_codemi', 'ap_catend', 'ap_apacant', 'ap_unisol', 'ap_dtsolic',
+           'ap_dtaut', 'ap_cidcas', 'ap_cidpri', 'ap_cidsec', 'ap_etnia', 'an_dtpdr', 'an_altura', 'an_peso', 'an_diures',
+           'an_glicos', 'an_acevas', 'an_ulsoab', 'an_tru', 'an_intfis', 'an_cncdo', 'an_albumi', 'an_hcv', 'an_hbsag',
+           'an_hiv', 'an_hb', 'uf', 'ano', 'mes']
