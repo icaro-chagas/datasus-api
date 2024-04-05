@@ -1,6 +1,8 @@
 from ..models.sihsus.er import ERSihsus
 from ..models.sihsus.rd import RDSihsus
-from ..serializers.serializers_sihsus import ERSerializer, RDSerializer
+from ..models.sihsus.rj import RJSihsus
+from ..models.sihsus.sp import SPSihsus
+from ..serializers.serializers_sihsus import ERSerializer, RDSerializer, RJSerializer, SPSializer
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
@@ -12,16 +14,22 @@ MAX_ROWS_PER_PAGE = 200000
 TABLE_NAMES = {
     'ER': 'er_sihsus',
     'RD': 'rd_sihsus',
+    'RJ': 'rj_sihsus',
+    'SP': 'sp_sihsus',
 }
 
 MODELS = {
     'ER': ERSihsus,
     'RD': RDSihsus,
+    'RJ': RJSihsus,
+    'SP': SPSihsus,
 }
 
 SERIALIZERS = {
     'ER': ERSerializer,
     'RD': RDSerializer,
+    'RJ': RJSerializer,
+    'SP': SPSializer,
 }
 
 
@@ -32,6 +40,14 @@ def handle_request_er(request, format=None):
 @api_view(['GET', 'POST', 'DELETE'])
 def handle_request_rd(request, format=None):
     return handle_request(request, 'RD', format)
+
+@api_view(['GET', 'POST', 'DELETE'])
+def handle_request_rj(request, format=None):
+    return handle_request(request, 'RJ', format)
+
+@api_view(['GET', 'POST', 'DELETE'])
+def handle_request_sp(request, format=None):
+    return handle_request(request, 'SP', format)
 
 
 def handle_request(request, prefix, format=None):
