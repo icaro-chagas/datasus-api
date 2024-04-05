@@ -7,6 +7,7 @@ from datasus_api.views import views_ciha
 from datasus_api.views import views_pce
 from datasus_api.views import views_po
 from datasus_api.views import views_resp
+from datasus_api.views import views_sihsus
 from rest_framework.urlpatterns import format_suffix_patterns
 
 urlpatterns = [
@@ -38,7 +39,9 @@ urlpatterns = [
     path('siasus/atd', views_siasus.handle_request_atd),
     path('siasus/pa', views_siasus.handle_request_pa),
     path('siasus/ps', views_siasus.handle_request_ps),
-    path('siasus/sad', views_siasus.handle_request_sad)
+    path('siasus/sad', views_siasus.handle_request_sad),
+    path('sihsus/er', views_sihsus.handle_request_er),
+    path('sihsus/rd', views_sihsus.handle_request_rd),
 ]
 
 urlpatterns = format_suffix_patterns(urlpatterns)

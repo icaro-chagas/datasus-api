@@ -54,11 +54,14 @@ def get_ftp_connection(base_name, filename_prefix):
     elif base_name == 'RESP':
         ftp_path = 'dissemin/publicos/RESP/DADOS'
 
-    elif base_name == 'SIASUS1' or base_name == 'SIHSUS1':
+    elif base_name == 'SIASUS1':
         ftp_path = f'dissemin/publicos/SIASUS/200801_/Dados'
 
     elif base_name == 'SIASUS2':
         ftp_path = f'dissemin/publicos/SIASUS/199407_200712/Dados'
+
+    elif base_name == 'SIHSUS1':
+        ftp_path = f'dissemin/publicos/SIHSUS/200801_/Dados'
 
     elif base_name == 'SIHSUS2':
         ftp_path = f'dissemin/publicos/SIHSUS/199201_200712/Dados'
