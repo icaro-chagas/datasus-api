@@ -37,6 +37,8 @@ urlpatterns = [
     path('siasus/ar', views_siasus.handle_request_ar),
     path('siasus/atd', views_siasus.handle_request_atd),
     path('siasus/pa', views_siasus.handle_request_pa),
+    path('siasus/ps', views_siasus.handle_request_ps),
+    path('siasus/sad', views_siasus.handle_request_sad)
 ]
 
 urlpatterns = format_suffix_patterns(urlpatterns)

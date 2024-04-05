@@ -8,9 +8,12 @@ from ..models.siasus.aq import AQSiasus
 from ..models.siasus.ar import ARSiasus
 from ..models.siasus.atd import ATDSiasus
 from ..models.siasus.pa import PASiasus
+from ..models.siasus.ps import PSSiasus
+from ..models.siasus.sad import SADSiasus
 from ..models.file_metadata import FileMetadata
 from ..serializers.serializers_siasus import ABSerializer, ABOSerializer, ACFSerializer, ADSerializer, AMSerializer
 from ..serializers.serializers_siasus import ANSerializer, AQSerializer, ARSerializer, ATDSerializer, PASerializer
+from ..serializers.serializers_siasus import PSSerializer, SADSerializer
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
@@ -29,7 +32,10 @@ TABLE_NAMES = {
     'AQ': 'aq_siasus',
     'AR': 'ar_siasus',
     'ATD': 'atd_siasus',
-    'PA': 'pa_siasus'
+    'PA': 'pa_siasus',
+    'PS': 'ps_siasus',
+    'SAD': 'sad_siasus'
+
 }
 
 MODELS = {
@@ -42,7 +48,9 @@ MODELS = {
     'AQ': AQSiasus,
     'AR': ARSiasus,
     'ATD': ATDSiasus,
-    'PA': PASiasus
+    'PA': PASiasus,
+    'PS': PSSiasus,
+    'SAD': SADSiasus
 }
 
 SERIALIZERS = {
@@ -55,12 +63,11 @@ SERIALIZERS = {
     'AQ': AQSerializer,
     'AR': ARSerializer,
     'ATD': ATDSerializer,
-    'PA': PASerializer
+    'PA': PASerializer,
+    'PS': PSSerializer,
+    'SAD': SADSerializer
 }
 
-@api_view(['GET', 'POST', 'DELETE'])
-def handle_request_pa(request, format=None):
-    return handle_request(request, 'PA', format)
 
 @api_view(['GET', 'POST', 'DELETE'])
 def handle_request_ab(request, format=None):
@@ -97,6 +104,18 @@ def handle_request_ar(request, format=None):
 @api_view(['GET', 'POST', 'DELETE'])
 def handle_request_atd(request, format=None):
     return handle_request(request, 'ATD', format)
+
+@api_view(['GET', 'POST', 'DELETE'])
+def handle_request_pa(request, format=None):
+    return handle_request(request, 'PA', format)
+
+@api_view(['GET', 'POST', 'DELETE'])
+def handle_request_ps(request, format=None):
+    return handle_request(request, 'PS', format)
+
+@api_view(['GET', 'POST', 'DELETE'])
+def handle_request_sad(request, format=None):
+    return handle_request(request, 'SAD', format)
 
 
 def handle_request(request, prefix, format=None):

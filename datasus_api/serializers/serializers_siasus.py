@@ -9,8 +9,8 @@ from ..models.siasus.aq import AQSiasus
 from ..models.siasus.ar import ARSiasus
 from ..models.siasus.atd import ATDSiasus
 from ..models.siasus.pa import PASiasus
-
-
+from ..models.siasus.ps import PSSiasus
+from ..models.siasus.sad import SADSiasus
         
 
 class ABSerializer(serializers.ModelSerializer):
@@ -145,3 +145,36 @@ class PASerializer(serializers.ModelSerializer):
                   'pa_qtdpro', 'pa_qtdapr', 'pa_valpro', 'pa_valapr', 'pa_ufdif', 'pa_mndif', 'pa_dif_val', 'nu_vpa_tot',
                   'nu_pa_tot', 'pa_indica', 'pa_codoco', 'pa_flqt', 'pa_fler', 'pa_etnia', 'pa_vl_cf', 'pa_vl_cl',
                   'pa_vl_inc', 'pa_srv_c', 'pa_ine', 'pa_nat_jur', 'uf', 'ano', 'mes']
+        
+
+class PSSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = PSSiasus
+        fields = ['cnes_exec', 'gestao', 'condic', 'ufmun', 'tpups', 'tippre', 'mn_ind', 'cnpjcpf', 'cnpjmnt',
+           'dt_process', 'dt_atend', 'cns_pac', 'dtnasc', 'tpidadepac', 'idadepac', 'nacion_pac', 'sexopac',
+           'racacor', 'etnia', 'munpac', 'mot_cob', 'dt_motcob', 'catend', 'cidpri', 'cidassoc', 'origem_pac',
+           'dt_inicio', 'dt_fim', 'cob_esf', 'cnes_esf', 'destinopac', 'pa_proc_id', 'pa_qtdpro', 'pa_qtdapr',
+           'pa_srv', 'pa_class_s', 'sit_rua', 'tp_droga', 'loc_realiz', 'inicio', 'fim', 'permanen', 'qtdate',
+           'qtdpcn', 'nat_jur', 'uf', 'ano', 'mes']
+        
+
+class PSSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = PSSiasus
+        fields = ['cnes_exec', 'gestao', 'condic', 'ufmun', 'tpups', 'tippre', 'mn_ind', 'cnpjcpf', 'cnpjmnt',
+           'dt_process', 'dt_atend', 'cns_pac', 'dtnasc', 'tpidadepac', 'idadepac', 'nacion_pac', 'sexopac',
+           'racacor', 'etnia', 'munpac', 'mot_cob', 'dt_motcob', 'catend', 'cidpri', 'cidassoc', 'origem_pac',
+           'dt_inicio', 'dt_fim', 'cob_esf', 'cnes_esf', 'destinopac', 'pa_proc_id', 'pa_qtdpro', 'pa_qtdapr',
+           'pa_srv', 'pa_class_s', 'sit_rua', 'tp_droga', 'loc_realiz', 'inicio', 'fim', 'permanen', 'qtdate',
+           'qtdpcn', 'nat_jur', 'uf', 'ano', 'mes']
+        
+
+class SADSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = SADSiasus
+        fields = ['cnes_exec', 'gestao', 'condic', 'ufmun', 'tpups', 'mn_ind', 'cnpjcpf', 'cnpjmnt', 'dt_process',
+                  'dt_atend', 'cns_pac', 'dtnasc', 'tpidadepac', 'idadepac', 'nacion_pac', 'sexopac', 'racacor', 'etnia',
+                  'munpac', 'mot_cob', 'dt_motcob', 'catend', 'cidpri', 'cidassoc', 'origem_pac', 'dt_inicio', 'dt_fim',
+                  'cob_esf', 'cnes_esf', 'destinopac', 'pa_proc_id', 'pa_qtdpro', 'pa_qtdapr', 'pa_srv', 'pa_class_s',
+                  'pa_equipe', 'pa_tp_eqp', 'pa_cid', 'inicio', 'fim', 'permanen', 'qtdate', 'qtdpcn', 'co_ine', 'nat_jur',
+                  'uf', 'ano', 'mes']
