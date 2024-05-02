@@ -1,8 +1,8 @@
 from django.db import models
 
 class FileMetadata(models.Model):
-    filename = models.CharField(max_length=255)
-    prefix = models.CharField(max_length=5)
+    filename = models.CharField(max_length=15)
+    prefix = models.CharField(max_length=10)
     uf = models.CharField(max_length=2)
     year = models.CharField(max_length=4)
     month = models.CharField(max_length=2)

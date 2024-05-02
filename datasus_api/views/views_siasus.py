@@ -19,6 +19,11 @@ from rest_framework.response import Response
 from rest_framework import status
 from ..util.postgresql_util import PostgresDbOperations
 from ..util.datasus_util import download_file
+from drf_yasg.utils import swagger_auto_schema
+from ..util.doc_api_util import uf_param_get, month_param_get, year_param_get
+from ..util.doc_api_util import uf_param_post, month_param_post, year_param_post, letter_param_post, letter_param_post
+from ..util.doc_api_util import uf_param_delete, month_param_delete, year_param_delete
+
 
 MAX_ROWS_PER_PAGE = 200000
 
@@ -69,50 +74,205 @@ SERIALIZERS = {
 }
 
 
+@swagger_auto_schema(
+    methods=['GET'], operation_summary='Fornece dados do AB', operation_description='Fornece dados de acordo com os parâmetros informados.',
+    manual_parameters=[uf_param_get, month_param_get, year_param_get], responses={200: 'OK'}, tags=['SIASUS/AB']
+)
+@swagger_auto_schema(
+    methods=['POST'], operation_summary='Insere arquivo do AB', operation_description='Baixa e insere os dados de um arquivo do DATASUS no SGBD.',
+    manual_parameters=[uf_param_post, month_param_post, year_param_post, letter_param_post], responses={201: 'Created', 400: 'Bad Request'}, tags=['SIASUS/AB']
+)
+@swagger_auto_schema(
+    methods=['DELETE'], operation_summary='Deleta dados do AB', operation_description='Deleta dados de acordo com os parâmetros informados.',
+    manual_parameters=[uf_param_delete, month_param_delete, year_param_delete], tags=['SIASUS/AB'], responses={204: 'No Content', 400: 'Bad Request'}
+)
 @api_view(['GET', 'POST', 'DELETE'])
 def handle_request_ab(request, format=None):
     return handle_request(request, 'AB', format)
 
+
+@swagger_auto_schema(
+    methods=['GET'], operation_summary='Fornece dados do ABO', operation_description='Fornece dados de acordo com os parâmetros informados.',
+    manual_parameters=[uf_param_get, month_param_get, year_param_get], responses={200: 'OK'}, tags=['SIASUS/ABO']
+)
+@swagger_auto_schema(
+    methods=['POST'], operation_summary='Insere arquivo do ABO', operation_description='Baixa e insere os dados de um arquivo do DATASUS no SGBD.',
+    manual_parameters=[uf_param_post, month_param_post, year_param_post, letter_param_post], responses={201: 'Created', 400: 'Bad Request'}, tags=['SIASUS/ABO']
+)
+@swagger_auto_schema(
+    methods=['DELETE'], operation_summary='Deleta dados do ABO', operation_description='Deleta dados de acordo com os parâmetros informados.',
+    manual_parameters=[uf_param_delete, month_param_delete, year_param_delete], tags=['SIASUS/ABO'], responses={204: 'No Content', 400: 'Bad Request'}
+)
 @api_view(['GET', 'POST', 'DELETE'])
 def handle_request_abo(request, format=None):
     return handle_request(request, 'ABO', format)
 
+
+@swagger_auto_schema(
+    methods=['GET'], operation_summary='Fornece dados do ACF', operation_description='Fornece dados de acordo com os parâmetros informados.',
+    manual_parameters=[uf_param_get, month_param_get, year_param_get], responses={200: 'OK'}, tags=['SIASUS/ACF']
+)
+@swagger_auto_schema(
+    methods=['POST'], operation_summary='Insere arquivo do ACF', operation_description='Baixa e insere os dados de um arquivo do DATASUS no SGBD.',
+    manual_parameters=[uf_param_post, month_param_post, year_param_post, letter_param_post], responses={201: 'Created', 400: 'Bad Request'}, tags=['SIASUS/ACF']
+)
+@swagger_auto_schema(
+    methods=['DELETE'], operation_summary='Deleta dados do ACF', operation_description='Deleta dados de acordo com os parâmetros informados.',
+    manual_parameters=[uf_param_delete, month_param_delete, year_param_delete], tags=['SIASUS/ACF'], responses={204: 'No Content', 400: 'Bad Request'}
+)
 @api_view(['GET', 'POST', 'DELETE'])
 def handle_request_acf(request, format=None):
     return handle_request(request, 'ACF', format)
 
+
+@swagger_auto_schema(
+    methods=['GET'], operation_summary='Fornece dados do AD', operation_description='Fornece dados de acordo com os parâmetros informados.',
+    manual_parameters=[uf_param_get, month_param_get, year_param_get], responses={200: 'OK'}, tags=['SIASUS/AD']
+)
+@swagger_auto_schema(
+    methods=['POST'], operation_summary='Insere arquivo do AD', operation_description='Baixa e insere os dados de um arquivo do DATASUS no SGBD.',
+    manual_parameters=[uf_param_post, month_param_post, year_param_post, letter_param_post], responses={201: 'Created', 400: 'Bad Request'}, tags=['SIASUS/AD']
+)
+@swagger_auto_schema(
+    methods=['DELETE'], operation_summary='Deleta dados do AD', operation_description='Deleta dados de acordo com os parâmetros informados.',
+    manual_parameters=[uf_param_delete, month_param_delete, year_param_delete], tags=['SIASUS/AD'], responses={204: 'No Content', 400: 'Bad Request'}
+)
 @api_view(['GET', 'POST', 'DELETE'])
 def handle_request_ad(request, format=None):
     return handle_request(request, 'AD', format)
 
+
+@swagger_auto_schema(
+    methods=['GET'], operation_summary='Fornece dados do AM', operation_description='Fornece dados de acordo com os parâmetros informados.',
+    manual_parameters=[uf_param_get, month_param_get, year_param_get], responses={200: 'OK'}, tags=['SIASUS/AM']
+)
+@swagger_auto_schema(
+    methods=['POST'], operation_summary='Insere arquivo do AM', operation_description='Baixa e insere os dados de um arquivo do DATASUS no SGBD.',
+    manual_parameters=[uf_param_post, month_param_post, year_param_post, letter_param_post], responses={201: 'Created', 400: 'Bad Request'}, tags=['SIASUS/AM']
+)
+@swagger_auto_schema(
+    methods=['DELETE'], operation_summary='Deleta dados do AM', operation_description='Deleta dados de acordo com os parâmetros informados.',
+    manual_parameters=[uf_param_delete, month_param_delete, year_param_delete], tags=['SIASUS/AM'], responses={204: 'No Content', 400: 'Bad Request'}
+)
 @api_view(['GET', 'POST', 'DELETE'])
 def handle_request_am(request, format=None):
     return handle_request(request, 'AM', format)
 
+
+@swagger_auto_schema(
+    methods=['GET'], operation_summary='Fornece dados do AN', operation_description='Fornece dados de acordo com os parâmetros informados.',
+    manual_parameters=[uf_param_get, month_param_get, year_param_get], responses={200: 'OK'}, tags=['SIASUS/AN']
+)
+@swagger_auto_schema(
+    methods=['POST'], operation_summary='Insere arquivo do AN', operation_description='Baixa e insere os dados de um arquivo do DATASUS no SGBD.',
+    manual_parameters=[uf_param_post, month_param_post, year_param_post, letter_param_post], responses={201: 'Created', 400: 'Bad Request'}, tags=['SIASUS/AN']
+)
+@swagger_auto_schema(
+    methods=['DELETE'], operation_summary='Deleta dados do AN', operation_description='Deleta dados de acordo com os parâmetros informados.',
+    manual_parameters=[uf_param_delete, month_param_delete, year_param_delete], tags=['SIASUS/AN'], responses={204: 'No Content', 400: 'Bad Request'}
+)
 @api_view(['GET', 'POST', 'DELETE'])
 def handle_request_an(request, format=None):
     return handle_request(request, 'AN', format)
 
+
+@swagger_auto_schema(
+    methods=['GET'], operation_summary='Fornece dados do AQ', operation_description='Fornece dados de acordo com os parâmetros informados.',
+    manual_parameters=[uf_param_get, month_param_get, year_param_get], responses={200: 'OK'}, tags=['SIASUS/AQ']
+)
+@swagger_auto_schema(
+    methods=['POST'], operation_summary='Insere arquivo do AQ', operation_description='Baixa e insere os dados de um arquivo do DATASUS no SGBD.',
+    manual_parameters=[uf_param_post, month_param_post, year_param_post, letter_param_post], responses={201: 'Created', 400: 'Bad Request'}, tags=['SIASUS/AQ']
+)
+@swagger_auto_schema(
+    methods=['DELETE'], operation_summary='Deleta dados do AQ', operation_description='Deleta dados de acordo com os parâmetros informados.',
+    manual_parameters=[uf_param_delete, month_param_delete, year_param_delete], tags=['SIASUS/AQ'], responses={204: 'No Content', 400: 'Bad Request'}
+)
 @api_view(['GET', 'POST', 'DELETE'])
 def handle_request_aq(request, format=None):
     return handle_request(request, 'AQ', format)
 
+
+@swagger_auto_schema(
+    methods=['GET'], operation_summary='Fornece dados do AR', operation_description='Fornece dados de acordo com os parâmetros informados.',
+    manual_parameters=[uf_param_get, month_param_get, year_param_get], responses={200: 'OK'}, tags=['SIASUS/AR']
+)
+@swagger_auto_schema(
+    methods=['POST'], operation_summary='Insere arquivo do AR', operation_description='Baixa e insere os dados de um arquivo do DATASUS no SGBD.',
+    manual_parameters=[uf_param_post, month_param_post, year_param_post, letter_param_post], responses={201: 'Created', 400: 'Bad Request'}, tags=['SIASUS/AR']
+)
+@swagger_auto_schema(
+    methods=['DELETE'], operation_summary='Deleta dados do AR', operation_description='Deleta dados de acordo com os parâmetros informados.',
+    manual_parameters=[uf_param_delete, month_param_delete, year_param_delete], tags=['SIASUS/AR'], responses={204: 'No Content', 400: 'Bad Request'}
+)
 @api_view(['GET', 'POST', 'DELETE'])
 def handle_request_ar(request, format=None):
     return handle_request(request, 'AR', format)
 
+
+@swagger_auto_schema(
+    methods=['GET'], operation_summary='Fornece dados do ATD', operation_description='Fornece dados de acordo com os parâmetros informados.',
+    manual_parameters=[uf_param_get, month_param_get, year_param_get], responses={200: 'OK'}, tags=['SIASUS/ATD']
+)
+@swagger_auto_schema(
+    methods=['POST'], operation_summary='Insere arquivo do ATD', operation_description='Baixa e insere os dados de um arquivo do DATASUS no SGBD.',
+    manual_parameters=[uf_param_post, month_param_post, year_param_post, letter_param_post], responses={201: 'Created', 400: 'Bad Request'}, tags=['SIASUS/ATD']
+)
+@swagger_auto_schema(
+    methods=['DELETE'], operation_summary='Deleta dados do ATD', operation_description='Deleta dados de acordo com os parâmetros informados.',
+    manual_parameters=[uf_param_delete, month_param_delete, year_param_delete], tags=['SIASUS/ATD'], responses={204: 'No Content', 400: 'Bad Request'}
+)
 @api_view(['GET', 'POST', 'DELETE'])
 def handle_request_atd(request, format=None):
     return handle_request(request, 'ATD', format)
 
+
+@swagger_auto_schema(
+    methods=['GET'], operation_summary='Fornece dados do PA', operation_description='Fornece dados de acordo com os parâmetros informados.',
+    manual_parameters=[uf_param_get, month_param_get, year_param_get], responses={200: 'OK'}, tags=['SIASUS/PA']
+)
+@swagger_auto_schema(
+    methods=['POST'], operation_summary='Insere arquivo do PA', operation_description='Baixa e insere os dados de um arquivo do DATASUS no SGBD.',
+    manual_parameters=[uf_param_post, month_param_post, year_param_post, letter_param_post], responses={201: 'Created', 400: 'Bad Request'}, tags=['SIASUS/PA']
+)
+@swagger_auto_schema(
+    methods=['DELETE'], operation_summary='Deleta dados do PA', operation_description='Deleta dados de acordo com os parâmetros informados.',
+    manual_parameters=[uf_param_delete, month_param_delete, year_param_delete], tags=['SIASUS/PA'], responses={204: 'No Content', 400: 'Bad Request'}
+)
 @api_view(['GET', 'POST', 'DELETE'])
 def handle_request_pa(request, format=None):
     return handle_request(request, 'PA', format)
 
+
+@swagger_auto_schema(
+    methods=['GET'], operation_summary='Fornece dados do PS', operation_description='Fornece dados de acordo com os parâmetros informados.',
+    manual_parameters=[uf_param_get, month_param_get, year_param_get], responses={200: 'OK'}, tags=['SIASUS/PS']
+)
+@swagger_auto_schema(
+    methods=['POST'], operation_summary='Insere arquivo do PS', operation_description='Baixa e insere os dados de um arquivo do DATASUS no SGBD.',
+    manual_parameters=[uf_param_post, month_param_post, year_param_post, letter_param_post], responses={201: 'Created', 400: 'Bad Request'}, tags=['SIASUS/PS']
+)
+@swagger_auto_schema(
+    methods=['DELETE'], operation_summary='Deleta dados do PS', operation_description='Deleta dados de acordo com os parâmetros informados.',
+    manual_parameters=[uf_param_delete, month_param_delete, year_param_delete], tags=['SIASUS/PS'], responses={204: 'No Content', 400: 'Bad Request'}
+)
 @api_view(['GET', 'POST', 'DELETE'])
 def handle_request_ps(request, format=None):
     return handle_request(request, 'PS', format)
 
+
+@swagger_auto_schema(
+    methods=['GET'], operation_summary='Fornece dados do SAD', operation_description='Fornece dados de acordo com os parâmetros informados.',
+    manual_parameters=[uf_param_get, month_param_get, year_param_get], responses={200: 'OK'}, tags=['SIASUS/SAD']
+)
+@swagger_auto_schema(
+    methods=['POST'], operation_summary='Insere arquivo do SAD', operation_description='Baixa e insere os dados de um arquivo do DATASUS no SGBD.',
+    manual_parameters=[uf_param_post, month_param_post, year_param_post, letter_param_post], responses={201: 'Created', 400: 'Bad Request'}, tags=['SIASUS/SAD']
+)
+@swagger_auto_schema(
+    methods=['DELETE'], operation_summary='Deleta dados do SAD', operation_description='Deleta dados de acordo com os parâmetros informados.',
+    manual_parameters=[uf_param_delete, month_param_delete, year_param_delete], tags=['SIASUS/SAD'], responses={204: 'No Content', 400: 'Bad Request'}
+)
 @api_view(['GET', 'POST', 'DELETE'])
 def handle_request_sad(request, format=None):
     return handle_request(request, 'SAD', format)

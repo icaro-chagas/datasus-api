@@ -8,6 +8,11 @@ from rest_framework.response import Response
 from rest_framework import status
 from ..util.postgresql_util import PostgresDbOperations
 from ..util.datasus_util import download_file
+from drf_yasg.utils import swagger_auto_schema
+from ..util.doc_api_util import uf_param_get, month_param_get, year_param_get
+from ..util.doc_api_util import uf_param_post, month_param_post, year_param_post
+from ..util.doc_api_util import uf_param_delete, month_param_delete, year_param_delete
+
 
 MAX_ROWS_PER_PAGE = 200000
 
@@ -33,18 +38,69 @@ SERIALIZERS = {
 }
 
 
+@swagger_auto_schema(
+    methods=['GET'], operation_summary='Fornece dados do ER', operation_description='Fornece dados de acordo com os parâmetros informados.',
+    manual_parameters=[uf_param_get, month_param_get, year_param_get], responses={200: 'OK'}, tags=['SIHSUS/ER']
+)
+@swagger_auto_schema(
+    methods=['POST'], operation_summary='Insere arquivo do ER', operation_description='Baixa e insere os dados de um arquivo do DATASUS no SGBD.',
+    manual_parameters=[uf_param_post, month_param_post, year_param_post], responses={201: 'Created', 400: 'Bad Request'}, tags=['SIHSUS/ER']
+)
+@swagger_auto_schema(
+    methods=['DELETE'], operation_summary='Deleta dados do ER', operation_description='Deleta dados de acordo com os parâmetros informados.',
+    manual_parameters=[uf_param_delete, month_param_delete, year_param_delete], tags=['SIHSUS/ER'], responses={204: 'No Content', 400: 'Bad Request'}
+)
 @api_view(['GET', 'POST', 'DELETE'])
 def handle_request_er(request, format=None):
     return handle_request(request, 'ER', format)
 
+
+@swagger_auto_schema(
+    methods=['GET'], operation_summary='Fornece dados do RD', operation_description='Fornece dados de acordo com os parâmetros informados.',
+    manual_parameters=[uf_param_get, month_param_get, year_param_get], responses={200: 'OK'}, tags=['SIHSUS/RD']
+)
+@swagger_auto_schema(
+    methods=['POST'], operation_summary='Insere arquivo do RD', operation_description='Baixa e insere os dados de um arquivo do DATASUS no SGBD.',
+    manual_parameters=[uf_param_post, month_param_post, year_param_post], responses={201: 'Created', 400: 'Bad Request'}, tags=['SIHSUS/RD']
+)
+@swagger_auto_schema(
+    methods=['DELETE'], operation_summary='Deleta dados do RD', operation_description='Deleta dados de acordo com os parâmetros informados.',
+    manual_parameters=[uf_param_delete, month_param_delete, year_param_delete], tags=['SIHSUS/RD'], responses={204: 'No Content', 400: 'Bad Request'}
+)
 @api_view(['GET', 'POST', 'DELETE'])
 def handle_request_rd(request, format=None):
     return handle_request(request, 'RD', format)
 
+
+@swagger_auto_schema(
+    methods=['GET'], operation_summary='Fornece dados do RJ', operation_description='Fornece dados de acordo com os parâmetros informados.',
+    manual_parameters=[uf_param_get, month_param_get, year_param_get], responses={200: 'OK'}, tags=['SIHSUS/RJ']
+)
+@swagger_auto_schema(
+    methods=['POST'], operation_summary='Insere arquivo do RJ', operation_description='Baixa e insere os dados de um arquivo do DATASUS no SGBD.',
+    manual_parameters=[uf_param_post, month_param_post, year_param_post], responses={201: 'Created', 400: 'Bad Request'}, tags=['SIHSUS/RJ']
+)
+@swagger_auto_schema(
+    methods=['DELETE'], operation_summary='Deleta dados do RJ', operation_description='Deleta dados de acordo com os parâmetros informados.',
+    manual_parameters=[uf_param_delete, month_param_delete, year_param_delete], tags=['SIHSUS/RJ'], responses={204: 'No Content', 400: 'Bad Request'}
+)
 @api_view(['GET', 'POST', 'DELETE'])
 def handle_request_rj(request, format=None):
     return handle_request(request, 'RJ', format)
 
+
+@swagger_auto_schema(
+    methods=['GET'], operation_summary='Fornece dados do SP', operation_description='Fornece dados de acordo com os parâmetros informados.',
+    manual_parameters=[uf_param_get, month_param_get, year_param_get], responses={200: 'OK'}, tags=['SIHSUS/SP']
+)
+@swagger_auto_schema(
+    methods=['POST'], operation_summary='Insere arquivo do SP', operation_description='Baixa e insere os dados de um arquivo do DATASUS no SGBD.',
+    manual_parameters=[uf_param_post, month_param_post, year_param_post], responses={201: 'Created', 400: 'Bad Request'}, tags=['SIHSUS/SP']
+)
+@swagger_auto_schema(
+    methods=['DELETE'], operation_summary='Deleta dados do SP', operation_description='Deleta dados de acordo com os parâmetros informados.',
+    manual_parameters=[uf_param_delete, month_param_delete, year_param_delete], tags=['SIHSUS/SP'], responses={204: 'No Content', 400: 'Bad Request'}
+)
 @api_view(['GET', 'POST', 'DELETE'])
 def handle_request_sp(request, format=None):
     return handle_request(request, 'SP', format)

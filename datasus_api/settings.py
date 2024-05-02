@@ -30,12 +30,18 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+SWAGGER_SETTINGS = {
+    'USE_SESSION_AUTH': False,  # Disable Django login
+    'SECURITY_DEFINITIONS': None,  # Disable authorization
+    'EXCLUDED_TAGS': ['read']
+}
+
 
 # Application definition
-
 INSTALLED_APPS = [
     'rest_framework',
     'datasus_api',
+    'drf_yasg',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

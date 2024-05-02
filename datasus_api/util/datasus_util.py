@@ -4,6 +4,7 @@ import os
 import multiprocessing
 import urllib.error
 import urllib.request as request
+import time
 
 from pysus.utilities.readdbc import dbc2dbf, dbf_to_csvgz
 from time import sleep
@@ -11,7 +12,7 @@ from time import sleep
 logger=logging.getLogger()
 
 STORAGE_PATH = './datasus_api/util/tmp/'
-#STORAGE_PATH = '/app/datasus_api/util/' # Docler path
+#STORAGE_PATH = '/app/datasus_api/util/' # Docker path
 
 def run_function_with_timeout(target_function, args=(), timeout_seconds=60):
 
@@ -55,16 +56,16 @@ def get_ftp_connection(base_name, filename_prefix):
         ftp_path = 'dissemin/publicos/RESP/DADOS'
 
     elif base_name == 'SIASUS1':
-        ftp_path = f'dissemin/publicos/SIASUS/200801_/Dados'
+        ftp_path = 'dissemin/publicos/SIASUS/200801_/Dados'
 
     elif base_name == 'SIASUS2':
-        ftp_path = f'dissemin/publicos/SIASUS/199407_200712/Dados'
+        ftp_path = 'dissemin/publicos/SIASUS/199407_200712/Dados'
 
     elif base_name == 'SIHSUS1':
-        ftp_path = f'dissemin/publicos/SIHSUS/200801_/Dados'
+        ftp_path = 'dissemin/publicos/SIHSUS/200801_/Dados'
 
     elif base_name == 'SIHSUS2':
-        ftp_path = f'dissemin/publicos/SIHSUS/199201_200712/Dados'
+        ftp_path = 'dissemin/publicos/SIHSUS/199201_200712/Dados'
 
     elif base_name == 'PO':
         ftp_path = 'dissemin/publicos/PAINEL_ONCOLOGIA/DADOS'
@@ -73,10 +74,18 @@ def get_ftp_connection(base_name, filename_prefix):
         ftp_path = f'dissemin/publicos/{base_name}/201101_/Dados'
 
     elif base_name == 'SIM1':
-        ftp_path = 'dissemin/publicos/SIM/CID10/DORES/'
+        base_path = 'dissemin/publicos/SIM/CID10/' 
+        if filename_prefix == 'DO':
+            ftp_path = base_path + 'DORES/'
+        elif filename_prefix in ['DOEXT', 'DOFET', 'DOINF', 'DOMAT', 'DOREXT']:
+            ftp_path = base_path + 'DOFET/'
 
     elif base_name == 'SIM2':
-        ftp_path = 'dissemin/publicos/SIM/PRELIM/DORES/'
+        base_path = 'dissemin/publicos/SIM/CID9/' 
+        if filename_prefix == 'DO':
+            ftp_path = base_path + 'DORES/'
+        elif filename_prefix in ['DOEXT', 'DOFET', 'DOINF', 'DOMAT', 'DOREXT']:
+            ftp_path = base_path + 'DOFET/'
     
     elif base_name == 'SINAN1':
         ftp_path = 'dissemin/publicos/SINAN/DADOS/FINAIS/'
@@ -140,14 +149,24 @@ def aux_get_file(filename_dbc, storage_path, ftp_path):
     file_path_dbc = storage_path + filename_dbc
     file_path_dbf = storage_path + filename_dbf
     
-    print(f'Baixando arquivo: {filename_dbc}\n')
+    start_time_download = time.time()
+    print(f'Baixando arquivo: {filename_dbc}')
     request.urlretrieve(url, file_path_dbc)
+    end_time_download = time.time()
+    elapsed_time_download = round((end_time_download - start_time_download)/60, 3)
+
+    print(f'Tempo consumido para download: {elapsed_time_download} minutes\n')
     
+    start_time_convert = time.time()
     print(f'Convertendo o arquivo {filename_dbc} para csv...\n')
     dbc2dbf(file_path_dbc, file_path_dbf)
     os.remove(file_path_dbc)
     
     dbf_to_csvgz(file_path_dbf)
+    end_time_convert = time.time()
+    elapsed_time_convert = round((end_time_convert - start_time_convert)/60, 3)
+
+    print(f'Tempo consumido para conversão: {elapsed_time_convert} minutes\n')
     os.remove(file_path_dbf)
 
 
@@ -194,9 +213,5 @@ def download_file(base_name, filename, filename_prefix):
 class DownloadDataException(Exception):
     def __init__(self, message: str) -> None:
         super().__init__(message)
-
-    
-if __name__ == '__main__':
-    download_file('CNES', 'LTPB2101', 'LT')
 
     

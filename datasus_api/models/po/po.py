@@ -24,11 +24,8 @@ class PO(models.Model):
     dt_diag = models.CharField(max_length=20, null=True)
     dt_trat = models.CharField(max_length=20, null=True)
     dt_nasc = models.CharField(max_length=20, null=True)
-    uf = models.CharField(max_length=3, db_index=True)
+    uf = models.CharField(max_length=3)
     ano = models.CharField(max_length=4, db_index=True)
 
     class Meta:
         db_table = 'po'
-        indexes = [
-            models.Index(fields=['uf', 'ano'])
-        ]

@@ -21,8 +21,13 @@ from rest_framework.response import Response
 from rest_framework import status
 from ..util.postgresql_util import PostgresDbOperations
 from ..util.datasus_util import download_file
+from drf_yasg.utils import swagger_auto_schema
+from ..util.doc_api_util import uf_param_get, month_param_get, year_param_get
+from ..util.doc_api_util import uf_param_post, month_param_post, year_param_post
+from ..util.doc_api_util import uf_param_delete, month_param_delete, year_param_delete
 
 MAX_ROWS_PER_PAGE = 200000
+BASE_NAME = 'CNES'
 
 TABLE_NAMES = {
     'DC': 'dc_cnes',
@@ -69,77 +74,220 @@ SERIALIZERS = {
     'SR': SRSerializer
 }
 
-
+@swagger_auto_schema(
+    methods=['GET'], operation_summary='Fornece dados do EE', operation_description='Fornece dados de acordo com os parâmetros informados.',
+    manual_parameters=[uf_param_get, month_param_get, year_param_get], responses={200: 'OK'}, tags=['CNES/EE']
+)
+@swagger_auto_schema(
+    methods=['POST'], operation_summary='Insere arquivo do EE', operation_description='Baixa e insere os dados de um arquivo do DATASUS no SGBD.',
+    manual_parameters=[uf_param_post, month_param_post, year_param_post], responses={201: 'Created', 400: 'Bad Request'}, tags=['CNES/EE']
+)
+@swagger_auto_schema(
+    methods=['DELETE'], operation_summary='Deleta dados do EE', operation_description='Deleta dados de acordo com os parâmetros informados.',
+    manual_parameters=[uf_param_delete, month_param_delete, year_param_delete], tags=['CNES/EE'], responses={204: 'No Content', 400: 'Bad Request'}
+)
 @api_view(['GET', 'POST', 'DELETE'])
-def handle_request_ee(request, format=None):
-    return handle_request(request, 'EE', format)
+def handle_request_ee(request, format='json'):
+    return handle_request(request, 'EE')
 
 
+@swagger_auto_schema(
+    methods=['GET'], operation_summary='Fornece dados do DC', operation_description='Fornece dados de acordo com os parâmetros informados.',
+    manual_parameters=[uf_param_get, month_param_get, year_param_get], responses={200: 'OK'}, tags=['CNES/DC']
+)
+@swagger_auto_schema(
+    methods=['POST'], operation_summary='Insere arquivo do DC', operation_description='Baixa e insere os dados de um arquivo do DATASUS no SGBD.',
+    manual_parameters=[uf_param_post, month_param_post, year_param_post], responses={201: 'Created', 400: 'Bad Request'}, tags=['CNES/DC']
+)
+@swagger_auto_schema(
+    methods=['DELETE'], operation_summary='Deleta dados do DC', operation_description='Deleta dados de acordo com os parâmetros informados.',
+    manual_parameters=[uf_param_delete, month_param_delete, year_param_delete], tags=['CNES/DC'], responses={204: 'No Content', 400: 'Bad Request'}
+)
 @api_view(['GET', 'POST', 'DELETE'])
-def handle_request_dc(request, format=None):
-    return handle_request(request, 'DC', format)
+def handle_request_dc(request):
+    return handle_request(request, 'DC')
 
 
+@swagger_auto_schema(
+    methods=['GET'], operation_summary='Fornece dados do EF', operation_description='Fornece dados de acordo com os parâmetros informados.',
+    manual_parameters=[uf_param_get, month_param_get, year_param_get], responses={200: 'OK'}, tags=['CNES/EF']
+)
+@swagger_auto_schema(
+    methods=['POST'], operation_summary='Insere arquivo do EF', operation_description='Baixa e insere os dados de um arquivo do DATASUS no SGBD.',
+    manual_parameters=[uf_param_post, month_param_post, year_param_post], responses={201: 'Created', 400: 'Bad Request'}, tags=['CNES/EF']
+)
+@swagger_auto_schema(
+    methods=['DELETE'], operation_summary='Deleta dados do EF', operation_description='Deleta dados de acordo com os parâmetros informados.',
+    manual_parameters=[uf_param_delete, month_param_delete, year_param_delete], tags=['CNES/EF'], responses={204: 'No Content', 400: 'Bad Request'}
+)
 @api_view(['GET', 'POST', 'DELETE'])
-def handle_request_ef(request, format=None):
-    return handle_request(request, 'EF', format)
+def handle_request_ef(request):
+    return handle_request(request, 'EF')
 
 
+@swagger_auto_schema(
+    methods=['GET'], operation_summary='Fornece dados do EP', operation_description='Fornece dados de acordo com os parâmetros informados.',
+    manual_parameters=[uf_param_get, month_param_get, year_param_get], responses={200: 'OK'}, tags=['CNES/EP']
+)
+@swagger_auto_schema(
+    methods=['POST'], operation_summary='Insere arquivo do EP', operation_description='Baixa e insere os dados de um arquivo do DATASUS no SGBD.',
+    manual_parameters=[uf_param_post, month_param_post, year_param_post], responses={201: 'Created', 400: 'Bad Request'}, tags=['CNES/EP']
+)
+@swagger_auto_schema(
+    methods=['DELETE'], operation_summary='Deleta dados do EP', operation_description='Deleta dados de acordo com os parâmetros informados.',
+    manual_parameters=[uf_param_delete, month_param_delete, year_param_delete], tags=['CNES/EP'], responses={204: 'No Content', 400: 'Bad Request'}
+)
 @api_view(['GET', 'POST', 'DELETE'])
-def handle_request_ep(request, format=None):
-    return handle_request(request, 'EP', format)
+def handle_request_ep(request):
+    return handle_request(request, 'EP')
 
 
+@swagger_auto_schema(
+    methods=['GET'], operation_summary='Fornece dados do EQ', operation_description='Fornece dados de acordo com os parâmetros informados.',
+    manual_parameters=[uf_param_get, month_param_get, year_param_get], responses={200: 'OK'}, tags=['CNES/EQ']
+)
+@swagger_auto_schema(
+    methods=['POST'], operation_summary='Insere arquivo do EQ', operation_description='Baixa e insere os dados de um arquivo do DATASUS no SGBD.',
+    manual_parameters=[uf_param_post, month_param_post, year_param_post], responses={201: 'Created', 400: 'Bad Request'}, tags=['CNES/EQ']
+)
+@swagger_auto_schema(
+    methods=['DELETE'], operation_summary='Deleta dados do EQ', operation_description='Deleta dados de acordo com os parâmetros informados.',
+    manual_parameters=[uf_param_delete, month_param_delete, year_param_delete], tags=['CNES/EQ'], responses={204: 'No Content', 400: 'Bad Request'}
+)
 @api_view(['GET', 'POST', 'DELETE'])
-def handle_request_eq(request, format=None):
-    return handle_request(request, 'EQ', format)
+def handle_request_eq(request):
+    return handle_request(request, 'EQ')
 
 
+@swagger_auto_schema(
+    methods=['GET'], operation_summary='Fornece dados do GM', operation_description='Fornece dados de acordo com os parâmetros informados.',
+    manual_parameters=[uf_param_get, month_param_get, year_param_get], responses={200: 'OK'}, tags=['CNES/GM']
+)
+@swagger_auto_schema(
+    methods=['POST'], operation_summary='Insere arquivo do GM', operation_description='Baixa e insere os dados de um arquivo do DATASUS no SGBD.',
+    manual_parameters=[uf_param_post, month_param_post, year_param_post], responses={201: 'Created', 400: 'Bad Request'}, tags=['CNES/GM']
+)
+@swagger_auto_schema(
+    methods=['DELETE'], operation_summary='Deleta dados do GM', operation_description='Deleta dados de acordo com os parâmetros informados.',
+    manual_parameters=[uf_param_delete, month_param_delete, year_param_delete], tags=['CNES/GM'], responses={204: 'No Content', 400: 'Bad Request'}
+)
 @api_view(['GET', 'POST', 'DELETE'])
-def handle_request_gm(request, format=None):
-    return handle_request(request, 'GM', format)
+def handle_request_gm(request):
+    return handle_request(request, 'GM')
 
 
+@swagger_auto_schema(
+    methods=['GET'], operation_summary='Fornece dados do HB', operation_description='Fornece dados de acordo com os parâmetros informados.',
+    manual_parameters=[uf_param_get, month_param_get, year_param_get], responses={200: 'OK'}, tags=['CNES/HB']
+)
+@swagger_auto_schema(
+    methods=['POST'], operation_summary='Insere arquivo do HB', operation_description='Baixa e insere os dados de um arquivo do DATASUS no SGBD.',
+    manual_parameters=[uf_param_post, month_param_post, year_param_post], responses={201: 'Created', 400: 'Bad Request'}, tags=['CNES/HB']
+)
+@swagger_auto_schema(
+    methods=['DELETE'], operation_summary='Deleta dados do HB', operation_description='Deleta dados de acordo com os parâmetros informados.',
+    manual_parameters=[uf_param_delete, month_param_delete, year_param_delete], tags=['CNES/HB'], responses={204: 'No Content', 400: 'Bad Request'}
+)
 @api_view(['GET', 'POST', 'DELETE'])
-def handle_request_hb(request, format=None):
-    return handle_request(request, 'HB', format)
+def handle_request_hb(request):
+    return handle_request(request, 'HB')
 
 
+@swagger_auto_schema(
+    methods=['GET'], operation_summary='Fornece dados do IN', operation_description='Fornece dados de acordo com os parâmetros informados.',
+    manual_parameters=[uf_param_get, month_param_get, year_param_get], responses={200: 'OK'}, tags=['CNES/IN']
+)
+@swagger_auto_schema(
+    methods=['POST'], operation_summary='Insere arquivo do IN', operation_description='Baixa e insere os dados de um arquivo do DATASUS no SGBD.',
+    manual_parameters=[uf_param_post, month_param_post, year_param_post], responses={201: 'Created', 400: 'Bad Request'}, tags=['CNES/IN']
+)
+@swagger_auto_schema(
+    methods=['DELETE'], operation_summary='Deleta dados do IN', operation_description='Deleta dados de acordo com os parâmetros informados.',
+    manual_parameters=[uf_param_delete, month_param_delete, year_param_delete], tags=['CNES/IN'], responses={204: 'No Content', 400: 'Bad Request'}
+)
 @api_view(['GET', 'POST', 'DELETE'])
-def handle_request_in(request, format=None):
-    return handle_request(request, 'IN', format)
+def handle_request_in(request):
+    return handle_request(request, 'IN')
 
 
+@swagger_auto_schema(
+    methods=['GET'], operation_summary='Fornece dados do LT', operation_description='Fornece dados de acordo com os parâmetros informados.',
+    manual_parameters=[uf_param_get, month_param_get, year_param_get], responses={200: 'OK'}, tags=['CNES/LT']
+)
+@swagger_auto_schema(
+    methods=['POST'], operation_summary='Insere arquivo do LT', operation_description='Baixa e insere os dados de um arquivo do DATASUS no SGBD.',
+    manual_parameters=[uf_param_post, month_param_post, year_param_post], responses={201: 'Created', 400: 'Bad Request'}, tags=['CNES/LT']
+)
+@swagger_auto_schema(
+    methods=['DELETE'], operation_summary='Deleta dados do LT', operation_description='Deleta dados de acordo com os parâmetros informados.',
+    manual_parameters=[uf_param_delete, month_param_delete, year_param_delete], tags=['CNES/LT'], responses={204: 'No Content', 400: 'Bad Request'}
+)
 @api_view(['GET', 'POST', 'DELETE'])
-def handle_request_lt(request, format=None):
-    return handle_request(request, 'LT', format)
+def handle_request_lt(request):
+    return handle_request(request, 'LT')
 
 
+@swagger_auto_schema(
+    methods=['GET'], operation_summary='Fornece dados do PF', operation_description='Fornece dados de acordo com os parâmetros informados.',
+    manual_parameters=[uf_param_get, month_param_get, year_param_get], responses={200: 'OK'}, tags=['CNES/PF']
+)
+@swagger_auto_schema(
+    methods=['POST'], operation_summary='Insere arquivo do PF', operation_description='Baixa e insere os dados de um arquivo do DATASUS no SGBD.',
+    manual_parameters=[uf_param_post, month_param_post, year_param_post], responses={201: 'Created', 400: 'Bad Request'}, tags=['CNES/PF']
+)
+@swagger_auto_schema(
+    methods=['DELETE'], operation_summary='Deleta dados do PF', operation_description='Deleta dados de acordo com os parâmetros informados.',
+    manual_parameters=[uf_param_delete, month_param_delete, year_param_delete], tags=['CNES/PF'], responses={204: 'No Content', 400: 'Bad Request'}
+)
 @api_view(['GET', 'POST', 'DELETE'])
-def handle_request_pf(request, format=None):
-    return handle_request(request, 'PF', format)
+def handle_request_pf(request):
+    return handle_request(request, 'PF')
 
 
+@swagger_auto_schema(
+    methods=['GET'], operation_summary='Fornece dados do RC', operation_description='Fornece dados de acordo com os parâmetros informados.',
+    manual_parameters=[uf_param_get, month_param_get, year_param_get], responses={200: 'OK'}, tags=['CNES/RC']
+)
+@swagger_auto_schema(
+    methods=['POST'], operation_summary='Insere arquivo do RC', operation_description='Baixa e insere os dados de um arquivo do DATASUS no SGBD.',
+    manual_parameters=[uf_param_post, month_param_post, year_param_post], responses={201: 'Created', 400: 'Bad Request'}, tags=['CNES/RC']
+)
+@swagger_auto_schema(
+    methods=['DELETE'], operation_summary='Deleta dados do RC', operation_description='Deleta dados de acordo com os parâmetros informados.',
+    manual_parameters=[uf_param_delete, month_param_delete, year_param_delete], tags=['CNES/RC'], responses={204: 'No Content', 400: 'Bad Request'}
+)
 @api_view(['GET', 'POST', 'DELETE'])
-def handle_request_rc(request, format=None):
-    return handle_request(request, 'RC', format)
+def handle_request_rc(request):
+    return handle_request(request, 'RC')
 
 
+@swagger_auto_schema(
+    methods=['GET'], operation_summary='Fornece dados do SR', operation_description='Fornece dados de acordo com os parâmetros informados.',
+    manual_parameters=[uf_param_get, month_param_get, year_param_get], responses={200: 'OK'}, tags=['CNES/SR']
+)
+@swagger_auto_schema(
+    methods=['POST'], operation_summary='Insere arquivo do SR', operation_description='Baixa e insere os dados de um arquivo do DATASUS no SGBD.',
+    manual_parameters=[uf_param_post, month_param_post, year_param_post], responses={201: 'Created', 400: 'Bad Request'}, tags=['CNES/SR']
+)
+@swagger_auto_schema(
+    methods=['DELETE'], operation_summary='Deleta dados do SR', operation_description='Deleta dados de acordo com os parâmetros informados.',
+    manual_parameters=[uf_param_delete, month_param_delete, year_param_delete], tags=['CNES/SR'], responses={204: 'No Content', 400: 'Bad Request'}
+)
 @api_view(['GET', 'POST', 'DELETE'])
-def handle_request_sr(request, format=None):
-    return handle_request(request, 'SR', format)
+def handle_request_sr(request):
+    return handle_request(request, 'SR')
 
 
-def handle_request(request, prefix, format=None):
+def handle_request(request, prefix):
     if request.method == 'GET':
-        return get(request, prefix, format)
+        return get(request, prefix)
     elif request.method == 'POST':
-        return insert(request, prefix, format)
+        return insert(request, prefix)
     elif request.method == 'DELETE':
-        return delete(request, prefix, format)
+        return delete(request, prefix)
 
 
-def insert(request, prefix, format=None):
+def insert(request, prefix):
     uf = request.GET.get('uf')
     month = request.GET.get('month')
     full_year = request.GET.get('year')
@@ -169,7 +317,7 @@ def insert(request, prefix, format=None):
     return Response(status=status.HTTP_201_CREATED)
 
 
-def get(request, prefix, format=None):
+def get(request, prefix):
 
     uf = request.GET.get('uf')
     year = request.GET.get('year')
@@ -223,7 +371,7 @@ def get_aux(prefix, uf, month, year, page_number):
     return data
 
 
-def delete(request, prefix, format=None):
+def delete(request, prefix):
     uf = request.GET.get('uf')
     year = request.GET.get('year')
     month = request.GET.get('month')

@@ -8,7 +8,24 @@ from datasus_api.views import views_pce
 from datasus_api.views import views_po
 from datasus_api.views import views_resp
 from datasus_api.views import views_sihsus
-from rest_framework.urlpatterns import format_suffix_patterns
+from datasus_api.views import views_doc
+from datasus_api.views import views_sim
+
+from rest_framework import permissions
+from drf_yasg.views import get_schema_view
+from drf_yasg import openapi
+
+
+schema_view = get_schema_view(
+    openapi.Info(
+        title="DATASUS API",
+        default_version='v1',
+        description="API que disponibiliza dados do DATASUS",
+        contact=openapi.Contact(email="icaro.almeida@ccc.ufcg.edu.br"),
+    ),
+    public=True,
+    permission_classes=(permissions.AllowAny,),
+)
 
 urlpatterns = [
     path('cih/cr', views_cih.handle_request_cr),
@@ -44,6 +61,12 @@ urlpatterns = [
     path('sihsus/rd', views_sihsus.handle_request_rd),
     path('sihsus/rj', views_sihsus.handle_request_rj),
     path('sihsus/sp', views_sihsus.handle_request_sp),
+    path('sim/do', views_sim.handle_request_do),
+    path('sim/doext', views_sim.handle_request_doext),
+    path('sim/dofet', views_sim.handle_request_dofet),
+    path('sim/doinf', views_sim.handle_request_doinf),
+    path('sim/domat', views_sim.handle_request_domat),
+    path('sim/dorext', views_sim.handle_request_dorext),
+    path('datasus-doc', views_doc.get_doc),
+    path('swagger', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui')
 ]
-
-urlpatterns = format_suffix_patterns(urlpatterns)

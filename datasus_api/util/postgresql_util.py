@@ -6,10 +6,11 @@ import pandas as pd
 from dotenv import load_dotenv
 load_dotenv()
 
+import time
 logger = logging.getLogger()
 
 STORAGE_PATH = './datasus_api/util/tmp/'
-#STORAGE_PATH = '/app/datasus_api/util/' # Docler path
+#STORAGE_PATH = '/app/datasus_api/util/' # Docker path
 
 class OperationType(enum.Enum):
     CREATE_TABLE = 1
@@ -116,7 +117,6 @@ class PostgresDbOperations():
         filename, prefix, uf, year, month = file_metadata
 
         query_metadata = f"INSERT INTO file_metadata (filename, prefix, uf, month, year, insertion_timestamp) VALUES ('{filename}', '{prefix}', '{uf}', '{month}', '{year}', CURRENT_TIMESTAMP);"
-        
         command = f"INSERT INTO {self.__table_name}({column_names}) VALUES({placeholders[:-2]});"
         
         self.__execute_command(command, OperationType.INSERT_ROWS, rows, query_metadata)
@@ -124,13 +124,25 @@ class PostgresDbOperations():
 
     def insert_file(self, filename, prefix, uf, year, month=''):
 
-        print('\nLendo o arquivo...')
+        print('Lendo o arquivo...')
+        print(f'Arquivo: {filename}.csv.gz\n')
+
+        start_time_read = time.time()
         df = pd.read_csv(f'{STORAGE_PATH}{filename}.csv.gz', compression='gzip', low_memory=False)
+        end_time_read = time.time()
+        elapsed_time_read = round((end_time_read - start_time_read)/60, 3)
+
+        print(f'Tempo consumido para leitura: {elapsed_time_read} minutes\n')
+
+        start_time_transformation = time.time()
         df['UF'] = uf
         df['ANO'] = year
 
         if month:
             df['MES'] = month
+
+        df.rename(columns={'NATURAL': 'NATUR'}, inplace=True)
+
 
         db_column_names = [col.upper() for col in self.get_column_names()]
         db_column_names.remove('ID')
@@ -140,18 +152,28 @@ class PostgresDbOperations():
         
         df = df[db_column_names]
 
-        print('\nTransformando o arquivo em lista de tuplas...')
+        print('Transformando o arquivo em lista de tuplas...')
         rows = list(df.itertuples(index=False, name=None))
 
-        file_metadata = (filename, prefix, uf, year, month)
+        end_time_transformation = time.time()
+        elapsed_time_transformation = round((end_time_transformation - start_time_transformation)/60, 3)
+        print(f'Tempo consumido para transformação: {elapsed_time_transformation} minutes\n')
 
-        print('\nInserindo arquivo no banco de dados...')
+        start_time_loading = time.time()
+        print('Inserindo arquivo no banco de dados...')
+
+        file_metadata = (filename, prefix, uf, year, month)
         self.insert_rows(file_metadata, rows, df.columns.tolist())
+
+        end_time_loading = time.time()
+        elapsed_time_loading = round((end_time_loading - start_time_loading)/60, 3)
+        print(f'Tempo consumido para inserção: {elapsed_time_loading} minutes\n')
 
         os.remove(f'{STORAGE_PATH}{filename}.csv.gz')
 
         del rows, df
-        print('\nProcessamento finalizado!')
+        print('Processamento finalizado!')
+
 
 
     # Tracking logic
