@@ -11,6 +11,7 @@ from datasus_api.views import views_sihsus
 from datasus_api.views import views_doc
 from datasus_api.views import views_sim
 from datasus_api.views import views_sinasc
+from datasus_api.views import views_siscolo
 
 from rest_framework import permissions
 from drf_yasg.views import get_schema_view
@@ -70,6 +71,8 @@ urlpatterns = [
     path('sim/dorext', views_sim.handle_request_dorext),
     path('sinasc/dn', views_sinasc.handle_request_dn),
     path('sinasc/dnex', views_sinasc.handle_request_dnex),
+    path('siscolo/cc', views_siscolo.handle_request_cc),
+    path('siscolo/hc', views_siscolo.handle_request_hc),
     path('datasus-doc', views_doc.get_doc),
     path('swagger', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui')
 ]
