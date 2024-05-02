@@ -29,3 +29,6 @@ class PO(models.Model):
 
     class Meta:
         db_table = 'po'
+        indexes = [
+            models.Index(fields=['uf', 'ano'])
+        ]
