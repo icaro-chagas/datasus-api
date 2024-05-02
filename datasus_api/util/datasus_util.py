@@ -102,6 +102,9 @@ def get_ftp_connection(base_name, filename_prefix):
     elif base_name == 'SISCOLO':
         ftp_path = 'dissemin/publicos/SISCAN/SISCOLO4/Dados/'
     
+    elif base_name == 'SISMAMA':
+        ftp_path = 'dissemin/publicos/SISCAN/SISMAMA/Dados/'
+
     ftp_connection = connect_ftp(ftp_path)
 
     return (ftp_connection, ftp_path)
