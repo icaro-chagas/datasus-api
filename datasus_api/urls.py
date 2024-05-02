@@ -13,6 +13,7 @@ from datasus_api.views import views_sim
 from datasus_api.views import views_sinasc
 from datasus_api.views import views_siscolo
 from datasus_api.views import views_sismama
+from datasus_api.views import views_sisprenatal
 
 from rest_framework import permissions
 from drf_yasg.views import get_schema_view
@@ -76,6 +77,7 @@ urlpatterns = [
     path('siscolo/hc', views_siscolo.handle_request_hc),
     path('sismama/cm', views_sismama.handle_request_cm),
     path('sismama/hm', views_sismama.handle_request_hm),
+    path('sisprenatal/pn', views_sisprenatal.handle_request_pn),
     path('datasus-doc', views_doc.get_doc),
     path('swagger', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui')
 ]
