@@ -8,9 +8,9 @@ from rest_framework import status
 from ..util.postgresql_util import PostgresDbOperations
 from ..util.datasus_util import download_file
 from drf_yasg.utils import swagger_auto_schema
-from ..util.doc_api_util import uf_param_get, month_param_get, year_param_get
 from ..util.doc_api_util import uf_param_post, month_param_post, year_param_post
 from ..util.doc_api_util import uf_param_delete, month_param_delete, year_param_delete
+from ..util.doc_api_util import uf_param_get, month_param_get, year_param_get, page_number_get
 
 MAX_ROWS_PER_PAGE = 200000
 BASE_NAME = 'SISMAMA'
@@ -33,7 +33,7 @@ SERIALIZERS = {
 
 @swagger_auto_schema(
     methods=['GET'], operation_summary='Fornece dados do CM', operation_description='Fornece dados de acordo com os parâmetros informados.',
-    manual_parameters=[uf_param_get, month_param_get, year_param_get], responses={200: 'OK'}, tags=['SISMAMA/CM']
+    manual_parameters=[uf_param_get, month_param_get, year_param_get, page_number_get], responses={200: 'OK'}, tags=['SISMAMA/CM']
 )
 @swagger_auto_schema(
     methods=['POST'], operation_summary='Insere arquivo do CM', operation_description='Baixa e insere os dados de um arquivo do DATASUS no SGBD.',
@@ -50,7 +50,7 @@ def handle_request_cm(request, format='json'):
 
 @swagger_auto_schema(
     methods=['GET'], operation_summary='Fornece dados do HM', operation_description='Fornece dados de acordo com os parâmetros informados.',
-    manual_parameters=[uf_param_get, month_param_get, year_param_get], responses={200: 'OK'}, tags=['SISMAMA/HM']
+    manual_parameters=[uf_param_get, month_param_get, year_param_get, page_number_get], responses={200: 'OK'}, tags=['SISMAMA/HM']
 )
 @swagger_auto_schema(
     methods=['POST'], operation_summary='Insere arquivo do HM', operation_description='Baixa e insere os dados de um arquivo do DATASUS no SGBD.',

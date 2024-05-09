@@ -20,9 +20,9 @@ from rest_framework import status
 from ..util.postgresql_util import PostgresDbOperations
 from ..util.datasus_util import download_file
 from drf_yasg.utils import swagger_auto_schema
-from ..util.doc_api_util import uf_param_get, month_param_get, year_param_get
-from ..util.doc_api_util import uf_param_post, month_param_post, year_param_post, letter_param_post, letter_param_post
 from ..util.doc_api_util import uf_param_delete, month_param_delete, year_param_delete
+from ..util.doc_api_util import uf_param_get, month_param_get, year_param_get, page_number_get
+from ..util.doc_api_util import uf_param_post, month_param_post, year_param_post, letter_param_post, letter_param_post
 
 
 MAX_ROWS_PER_PAGE = 200000
@@ -76,7 +76,7 @@ SERIALIZERS = {
 
 @swagger_auto_schema(
     methods=['GET'], operation_summary='Fornece dados do AB', operation_description='Fornece dados de acordo com os parâmetros informados.',
-    manual_parameters=[uf_param_get, month_param_get, year_param_get], responses={200: 'OK'}, tags=['SIASUS/AB']
+    manual_parameters=[uf_param_get, month_param_get, year_param_get, page_number_get], responses={200: 'OK'}, tags=['SIASUS/AB']
 )
 @swagger_auto_schema(
     methods=['POST'], operation_summary='Insere arquivo do AB', operation_description='Baixa e insere os dados de um arquivo do DATASUS no SGBD.',
@@ -93,7 +93,7 @@ def handle_request_ab(request, format=None):
 
 @swagger_auto_schema(
     methods=['GET'], operation_summary='Fornece dados do ABO', operation_description='Fornece dados de acordo com os parâmetros informados.',
-    manual_parameters=[uf_param_get, month_param_get, year_param_get], responses={200: 'OK'}, tags=['SIASUS/ABO']
+    manual_parameters=[uf_param_get, month_param_get, year_param_get, page_number_get], responses={200: 'OK'}, tags=['SIASUS/ABO']
 )
 @swagger_auto_schema(
     methods=['POST'], operation_summary='Insere arquivo do ABO', operation_description='Baixa e insere os dados de um arquivo do DATASUS no SGBD.',
@@ -110,7 +110,7 @@ def handle_request_abo(request, format=None):
 
 @swagger_auto_schema(
     methods=['GET'], operation_summary='Fornece dados do ACF', operation_description='Fornece dados de acordo com os parâmetros informados.',
-    manual_parameters=[uf_param_get, month_param_get, year_param_get], responses={200: 'OK'}, tags=['SIASUS/ACF']
+    manual_parameters=[uf_param_get, month_param_get, year_param_get, page_number_get], responses={200: 'OK'}, tags=['SIASUS/ACF']
 )
 @swagger_auto_schema(
     methods=['POST'], operation_summary='Insere arquivo do ACF', operation_description='Baixa e insere os dados de um arquivo do DATASUS no SGBD.',
@@ -127,7 +127,7 @@ def handle_request_acf(request, format=None):
 
 @swagger_auto_schema(
     methods=['GET'], operation_summary='Fornece dados do AD', operation_description='Fornece dados de acordo com os parâmetros informados.',
-    manual_parameters=[uf_param_get, month_param_get, year_param_get], responses={200: 'OK'}, tags=['SIASUS/AD']
+    manual_parameters=[uf_param_get, month_param_get, year_param_get, page_number_get], responses={200: 'OK'}, tags=['SIASUS/AD']
 )
 @swagger_auto_schema(
     methods=['POST'], operation_summary='Insere arquivo do AD', operation_description='Baixa e insere os dados de um arquivo do DATASUS no SGBD.',
@@ -144,7 +144,7 @@ def handle_request_ad(request, format=None):
 
 @swagger_auto_schema(
     methods=['GET'], operation_summary='Fornece dados do AM', operation_description='Fornece dados de acordo com os parâmetros informados.',
-    manual_parameters=[uf_param_get, month_param_get, year_param_get], responses={200: 'OK'}, tags=['SIASUS/AM']
+    manual_parameters=[uf_param_get, month_param_get, year_param_get, page_number_get], responses={200: 'OK'}, tags=['SIASUS/AM']
 )
 @swagger_auto_schema(
     methods=['POST'], operation_summary='Insere arquivo do AM', operation_description='Baixa e insere os dados de um arquivo do DATASUS no SGBD.',
@@ -161,7 +161,7 @@ def handle_request_am(request, format=None):
 
 @swagger_auto_schema(
     methods=['GET'], operation_summary='Fornece dados do AN', operation_description='Fornece dados de acordo com os parâmetros informados.',
-    manual_parameters=[uf_param_get, month_param_get, year_param_get], responses={200: 'OK'}, tags=['SIASUS/AN']
+    manual_parameters=[uf_param_get, month_param_get, year_param_get, page_number_get], responses={200: 'OK'}, tags=['SIASUS/AN']
 )
 @swagger_auto_schema(
     methods=['POST'], operation_summary='Insere arquivo do AN', operation_description='Baixa e insere os dados de um arquivo do DATASUS no SGBD.',
@@ -178,7 +178,7 @@ def handle_request_an(request, format=None):
 
 @swagger_auto_schema(
     methods=['GET'], operation_summary='Fornece dados do AQ', operation_description='Fornece dados de acordo com os parâmetros informados.',
-    manual_parameters=[uf_param_get, month_param_get, year_param_get], responses={200: 'OK'}, tags=['SIASUS/AQ']
+    manual_parameters=[uf_param_get, month_param_get, year_param_get, page_number_get], responses={200: 'OK'}, tags=['SIASUS/AQ']
 )
 @swagger_auto_schema(
     methods=['POST'], operation_summary='Insere arquivo do AQ', operation_description='Baixa e insere os dados de um arquivo do DATASUS no SGBD.',
@@ -195,7 +195,7 @@ def handle_request_aq(request, format=None):
 
 @swagger_auto_schema(
     methods=['GET'], operation_summary='Fornece dados do AR', operation_description='Fornece dados de acordo com os parâmetros informados.',
-    manual_parameters=[uf_param_get, month_param_get, year_param_get], responses={200: 'OK'}, tags=['SIASUS/AR']
+    manual_parameters=[uf_param_get, month_param_get, year_param_get, page_number_get], responses={200: 'OK'}, tags=['SIASUS/AR']
 )
 @swagger_auto_schema(
     methods=['POST'], operation_summary='Insere arquivo do AR', operation_description='Baixa e insere os dados de um arquivo do DATASUS no SGBD.',
@@ -212,7 +212,7 @@ def handle_request_ar(request, format=None):
 
 @swagger_auto_schema(
     methods=['GET'], operation_summary='Fornece dados do ATD', operation_description='Fornece dados de acordo com os parâmetros informados.',
-    manual_parameters=[uf_param_get, month_param_get, year_param_get], responses={200: 'OK'}, tags=['SIASUS/ATD']
+    manual_parameters=[uf_param_get, month_param_get, year_param_get, page_number_get], responses={200: 'OK'}, tags=['SIASUS/ATD']
 )
 @swagger_auto_schema(
     methods=['POST'], operation_summary='Insere arquivo do ATD', operation_description='Baixa e insere os dados de um arquivo do DATASUS no SGBD.',
@@ -229,7 +229,7 @@ def handle_request_atd(request, format=None):
 
 @swagger_auto_schema(
     methods=['GET'], operation_summary='Fornece dados do PA', operation_description='Fornece dados de acordo com os parâmetros informados.',
-    manual_parameters=[uf_param_get, month_param_get, year_param_get], responses={200: 'OK'}, tags=['SIASUS/PA']
+    manual_parameters=[uf_param_get, month_param_get, year_param_get, page_number_get], responses={200: 'OK'}, tags=['SIASUS/PA']
 )
 @swagger_auto_schema(
     methods=['POST'], operation_summary='Insere arquivo do PA', operation_description='Baixa e insere os dados de um arquivo do DATASUS no SGBD.',
@@ -246,7 +246,7 @@ def handle_request_pa(request, format=None):
 
 @swagger_auto_schema(
     methods=['GET'], operation_summary='Fornece dados do PS', operation_description='Fornece dados de acordo com os parâmetros informados.',
-    manual_parameters=[uf_param_get, month_param_get, year_param_get], responses={200: 'OK'}, tags=['SIASUS/PS']
+    manual_parameters=[uf_param_get, month_param_get, year_param_get, page_number_get], responses={200: 'OK'}, tags=['SIASUS/PS']
 )
 @swagger_auto_schema(
     methods=['POST'], operation_summary='Insere arquivo do PS', operation_description='Baixa e insere os dados de um arquivo do DATASUS no SGBD.',
@@ -263,7 +263,7 @@ def handle_request_ps(request, format=None):
 
 @swagger_auto_schema(
     methods=['GET'], operation_summary='Fornece dados do SAD', operation_description='Fornece dados de acordo com os parâmetros informados.',
-    manual_parameters=[uf_param_get, month_param_get, year_param_get], responses={200: 'OK'}, tags=['SIASUS/SAD']
+    manual_parameters=[uf_param_get, month_param_get, year_param_get, page_number_get], responses={200: 'OK'}, tags=['SIASUS/SAD']
 )
 @swagger_auto_schema(
     methods=['POST'], operation_summary='Insere arquivo do SAD', operation_description='Baixa e insere os dados de um arquivo do DATASUS no SGBD.',

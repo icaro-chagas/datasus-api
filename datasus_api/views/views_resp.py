@@ -7,9 +7,9 @@ from rest_framework import status
 from ..util.postgresql_util import PostgresDbOperations
 from ..util.datasus_util import download_file
 from drf_yasg.utils import swagger_auto_schema
-from ..util.doc_api_util import uf_param_get, month_param_get, year_param_get
 from ..util.doc_api_util import uf_param_post, month_param_post, year_param_post
 from ..util.doc_api_util import uf_param_delete, month_param_delete, year_param_delete
+from ..util.doc_api_util import uf_param_get, month_param_get, year_param_get, page_number_get
 
 
 MAX_ROWS_PER_PAGE = 200000
@@ -29,15 +29,15 @@ SERIALIZERS = {
 
 @swagger_auto_schema(
     methods=['GET'], operation_summary='Fornece dados do RESP', operation_description='Fornece dados de acordo com os parâmetros informados.',
-    manual_parameters=[uf_param_get, month_param_get, year_param_get], responses={200: 'OK'}, tags=['RESP']
+    manual_parameters=[uf_param_get, year_param_get, page_number_get], responses={200: 'OK'}, tags=['RESP']
 )
 @swagger_auto_schema(
     methods=['POST'], operation_summary='Insere arquivo do RESP', operation_description='Baixa e insere os dados de um arquivo do DATASUS no SGBD.',
-    manual_parameters=[uf_param_post, month_param_post, year_param_post], responses={201: 'Created', 400: 'Bad Request'}, tags=['RESP']
+    manual_parameters=[uf_param_post, year_param_post], responses={201: 'Created', 400: 'Bad Request'}, tags=['RESP']
 )
 @swagger_auto_schema(
     methods=['DELETE'], operation_summary='Deleta dados do RESP', operation_description='Deleta dados de acordo com os parâmetros informados.',
-    manual_parameters=[uf_param_delete, month_param_delete, year_param_delete], tags=['RESP'], responses={204: 'No Content', 400: 'Bad Request'}
+    manual_parameters=[uf_param_delete, year_param_delete], tags=['RESP'], responses={204: 'No Content', 400: 'Bad Request'}
 )
 @api_view(['GET', 'POST', 'DELETE'])
 def handle_request_resp(request, format=None):

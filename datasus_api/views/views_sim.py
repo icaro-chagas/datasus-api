@@ -13,9 +13,9 @@ from rest_framework import status
 from ..util.postgresql_util import PostgresDbOperations
 from ..util.datasus_util import download_file
 from drf_yasg.utils import swagger_auto_schema
-from ..util.doc_api_util import uf_param_get, year_param_get
 from ..util.doc_api_util import uf_param_post, year_param_post
 from ..util.doc_api_util import uf_param_delete, year_param_delete
+from ..util.doc_api_util import uf_param_get, year_param_get, page_number_get
 
 
 MAX_ROWS_PER_PAGE = 200000
@@ -51,7 +51,7 @@ SERIALIZERS = {
 
 @swagger_auto_schema(
     methods=['GET'], operation_summary='Fornece dados do DO', operation_description='Fornece dados de acordo com os parâmetros informados.',
-    manual_parameters=[uf_param_get, year_param_get], responses={200: 'OK'}, tags=['SIM/DO']
+    manual_parameters=[uf_param_get, year_param_get, page_number_get], responses={200: 'OK'}, tags=['SIM/DO']
 )
 @swagger_auto_schema(
     methods=['POST'], operation_summary='Insere arquivo do DO', operation_description='Baixa e insere os dados de um arquivo do DATASUS no SGBD.',
@@ -68,7 +68,7 @@ def handle_request_do(request, format=None):
 
 @swagger_auto_schema(
     methods=['GET'], operation_summary='Fornece dados do DOEXT', operation_description='Fornece dados de acordo com os parâmetros informados.',
-    manual_parameters=[year_param_get], responses={200: 'OK'}, tags=['SIM/DOEXT']
+    manual_parameters=[year_param_get, page_number_get], responses={200: 'OK'}, tags=['SIM/DOEXT']
 )
 @swagger_auto_schema(
     methods=['POST'], operation_summary='Insere arquivo do DOEXT', operation_description='Baixa e insere os dados de um arquivo do DATASUS no SGBD.',
@@ -85,7 +85,7 @@ def handle_request_doext(request, format=None):
 
 @swagger_auto_schema(
     methods=['GET'], operation_summary='Fornece dados do DOFET', operation_description='Fornece dados de acordo com os parâmetros informados.',
-    manual_parameters=[year_param_get], responses={200: 'OK'}, tags=['SIM/DOFET']
+    manual_parameters=[year_param_get, page_number_get], responses={200: 'OK'}, tags=['SIM/DOFET']
 )
 @swagger_auto_schema(
     methods=['POST'], operation_summary='Insere arquivo do DOFET', operation_description='Baixa e insere os dados de um arquivo do DATASUS no SGBD.',
@@ -102,7 +102,7 @@ def handle_request_dofet(request, format=None):
 
 @swagger_auto_schema(
     methods=['GET'], operation_summary='Fornece dados do DOINF', operation_description='Fornece dados de acordo com os parâmetros informados.',
-    manual_parameters=[year_param_get], responses={200: 'OK'}, tags=['SIM/DOINF']
+    manual_parameters=[year_param_get, page_number_get], responses={200: 'OK'}, tags=['SIM/DOINF']
 )
 @swagger_auto_schema(
     methods=['POST'], operation_summary='Insere arquivo do DOINF', operation_description='Baixa e insere os dados de um arquivo do DATASUS no SGBD.',
@@ -119,7 +119,7 @@ def handle_request_doinf(request, format=None):
 
 @swagger_auto_schema(
     methods=['GET'], operation_summary='Fornece dados do DOMAT', operation_description='Fornece dados de acordo com os parâmetros informados.',
-    manual_parameters=[year_param_get], responses={200: 'OK'}, tags=['SIM/DOMAT']
+    manual_parameters=[year_param_get, page_number_get], responses={200: 'OK'}, tags=['SIM/DOMAT']
 )
 @swagger_auto_schema(
     methods=['POST'], operation_summary='Insere arquivo do DOMAT', operation_description='Baixa e insere os dados de um arquivo do DATASUS no SGBD.',
@@ -136,7 +136,7 @@ def handle_request_domat(request, format=None):
 
 @swagger_auto_schema(
     methods=['GET'], operation_summary='Fornece dados do DOREXT', operation_description='Fornece dados de acordo com os parâmetros informados.',
-    manual_parameters=[year_param_get], responses={200: 'OK'}, tags=['SIM/DOREXT']
+    manual_parameters=[year_param_get, page_number_get], responses={200: 'OK'}, tags=['SIM/DOREXT']
 )
 @swagger_auto_schema(
     methods=['POST'], operation_summary='Insere arquivo do DOREXT', operation_description='Baixa e insere os dados de um arquivo do DATASUS no SGBD.',

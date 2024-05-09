@@ -1,5 +1,3 @@
-from django.http import JsonResponse
-from django.core.paginator import Paginator
 from ..models.cnes.dc import DCCnes
 from ..models.cnes.ee import EECnes
 from ..models.cnes.ef import EFCnes
@@ -22,9 +20,9 @@ from rest_framework import status
 from ..util.postgresql_util import PostgresDbOperations
 from ..util.datasus_util import download_file
 from drf_yasg.utils import swagger_auto_schema
-from ..util.doc_api_util import uf_param_get, month_param_get, year_param_get
 from ..util.doc_api_util import uf_param_post, month_param_post, year_param_post
 from ..util.doc_api_util import uf_param_delete, month_param_delete, year_param_delete
+from ..util.doc_api_util import uf_param_get, month_param_get, year_param_get, page_number_get
 
 MAX_ROWS_PER_PAGE = 200000
 BASE_NAME = 'CNES'
@@ -76,7 +74,7 @@ SERIALIZERS = {
 
 @swagger_auto_schema(
     methods=['GET'], operation_summary='Fornece dados do EE', operation_description='Fornece dados de acordo com os parâmetros informados.',
-    manual_parameters=[uf_param_get, month_param_get, year_param_get], responses={200: 'OK'}, tags=['CNES/EE']
+    manual_parameters=[uf_param_get, month_param_get, year_param_get, page_number_get], responses={200: 'OK'}, tags=['CNES/EE']
 )
 @swagger_auto_schema(
     methods=['POST'], operation_summary='Insere arquivo do EE', operation_description='Baixa e insere os dados de um arquivo do DATASUS no SGBD.',
@@ -93,7 +91,7 @@ def handle_request_ee(request, format='json'):
 
 @swagger_auto_schema(
     methods=['GET'], operation_summary='Fornece dados do DC', operation_description='Fornece dados de acordo com os parâmetros informados.',
-    manual_parameters=[uf_param_get, month_param_get, year_param_get], responses={200: 'OK'}, tags=['CNES/DC']
+    manual_parameters=[uf_param_get, month_param_get, year_param_get, page_number_get], responses={200: 'OK'}, tags=['CNES/DC']
 )
 @swagger_auto_schema(
     methods=['POST'], operation_summary='Insere arquivo do DC', operation_description='Baixa e insere os dados de um arquivo do DATASUS no SGBD.',
@@ -110,7 +108,7 @@ def handle_request_dc(request):
 
 @swagger_auto_schema(
     methods=['GET'], operation_summary='Fornece dados do EF', operation_description='Fornece dados de acordo com os parâmetros informados.',
-    manual_parameters=[uf_param_get, month_param_get, year_param_get], responses={200: 'OK'}, tags=['CNES/EF']
+    manual_parameters=[uf_param_get, month_param_get, year_param_get, page_number_get], responses={200: 'OK'}, tags=['CNES/EF']
 )
 @swagger_auto_schema(
     methods=['POST'], operation_summary='Insere arquivo do EF', operation_description='Baixa e insere os dados de um arquivo do DATASUS no SGBD.',
@@ -127,7 +125,7 @@ def handle_request_ef(request):
 
 @swagger_auto_schema(
     methods=['GET'], operation_summary='Fornece dados do EP', operation_description='Fornece dados de acordo com os parâmetros informados.',
-    manual_parameters=[uf_param_get, month_param_get, year_param_get], responses={200: 'OK'}, tags=['CNES/EP']
+    manual_parameters=[uf_param_get, month_param_get, year_param_get, page_number_get], responses={200: 'OK'}, tags=['CNES/EP']
 )
 @swagger_auto_schema(
     methods=['POST'], operation_summary='Insere arquivo do EP', operation_description='Baixa e insere os dados de um arquivo do DATASUS no SGBD.',
@@ -144,7 +142,7 @@ def handle_request_ep(request):
 
 @swagger_auto_schema(
     methods=['GET'], operation_summary='Fornece dados do EQ', operation_description='Fornece dados de acordo com os parâmetros informados.',
-    manual_parameters=[uf_param_get, month_param_get, year_param_get], responses={200: 'OK'}, tags=['CNES/EQ']
+    manual_parameters=[uf_param_get, month_param_get, year_param_get, page_number_get], responses={200: 'OK'}, tags=['CNES/EQ']
 )
 @swagger_auto_schema(
     methods=['POST'], operation_summary='Insere arquivo do EQ', operation_description='Baixa e insere os dados de um arquivo do DATASUS no SGBD.',
@@ -161,7 +159,7 @@ def handle_request_eq(request):
 
 @swagger_auto_schema(
     methods=['GET'], operation_summary='Fornece dados do GM', operation_description='Fornece dados de acordo com os parâmetros informados.',
-    manual_parameters=[uf_param_get, month_param_get, year_param_get], responses={200: 'OK'}, tags=['CNES/GM']
+    manual_parameters=[uf_param_get, month_param_get, year_param_get, page_number_get], responses={200: 'OK'}, tags=['CNES/GM']
 )
 @swagger_auto_schema(
     methods=['POST'], operation_summary='Insere arquivo do GM', operation_description='Baixa e insere os dados de um arquivo do DATASUS no SGBD.',
@@ -178,7 +176,7 @@ def handle_request_gm(request):
 
 @swagger_auto_schema(
     methods=['GET'], operation_summary='Fornece dados do HB', operation_description='Fornece dados de acordo com os parâmetros informados.',
-    manual_parameters=[uf_param_get, month_param_get, year_param_get], responses={200: 'OK'}, tags=['CNES/HB']
+    manual_parameters=[uf_param_get, month_param_get, year_param_get, page_number_get], responses={200: 'OK'}, tags=['CNES/HB']
 )
 @swagger_auto_schema(
     methods=['POST'], operation_summary='Insere arquivo do HB', operation_description='Baixa e insere os dados de um arquivo do DATASUS no SGBD.',
@@ -195,7 +193,7 @@ def handle_request_hb(request):
 
 @swagger_auto_schema(
     methods=['GET'], operation_summary='Fornece dados do IN', operation_description='Fornece dados de acordo com os parâmetros informados.',
-    manual_parameters=[uf_param_get, month_param_get, year_param_get], responses={200: 'OK'}, tags=['CNES/IN']
+    manual_parameters=[uf_param_get, month_param_get, year_param_get, page_number_get], responses={200: 'OK'}, tags=['CNES/IN']
 )
 @swagger_auto_schema(
     methods=['POST'], operation_summary='Insere arquivo do IN', operation_description='Baixa e insere os dados de um arquivo do DATASUS no SGBD.',
@@ -212,7 +210,7 @@ def handle_request_in(request):
 
 @swagger_auto_schema(
     methods=['GET'], operation_summary='Fornece dados do LT', operation_description='Fornece dados de acordo com os parâmetros informados.',
-    manual_parameters=[uf_param_get, month_param_get, year_param_get], responses={200: 'OK'}, tags=['CNES/LT']
+    manual_parameters=[uf_param_get, month_param_get, year_param_get, page_number_get], responses={200: 'OK'}, tags=['CNES/LT']
 )
 @swagger_auto_schema(
     methods=['POST'], operation_summary='Insere arquivo do LT', operation_description='Baixa e insere os dados de um arquivo do DATASUS no SGBD.',
@@ -229,7 +227,7 @@ def handle_request_lt(request):
 
 @swagger_auto_schema(
     methods=['GET'], operation_summary='Fornece dados do PF', operation_description='Fornece dados de acordo com os parâmetros informados.',
-    manual_parameters=[uf_param_get, month_param_get, year_param_get], responses={200: 'OK'}, tags=['CNES/PF']
+    manual_parameters=[uf_param_get, month_param_get, year_param_get, page_number_get], responses={200: 'OK'}, tags=['CNES/PF']
 )
 @swagger_auto_schema(
     methods=['POST'], operation_summary='Insere arquivo do PF', operation_description='Baixa e insere os dados de um arquivo do DATASUS no SGBD.',
@@ -246,7 +244,7 @@ def handle_request_pf(request):
 
 @swagger_auto_schema(
     methods=['GET'], operation_summary='Fornece dados do RC', operation_description='Fornece dados de acordo com os parâmetros informados.',
-    manual_parameters=[uf_param_get, month_param_get, year_param_get], responses={200: 'OK'}, tags=['CNES/RC']
+    manual_parameters=[uf_param_get, month_param_get, year_param_get, page_number_get], responses={200: 'OK'}, tags=['CNES/RC']
 )
 @swagger_auto_schema(
     methods=['POST'], operation_summary='Insere arquivo do RC', operation_description='Baixa e insere os dados de um arquivo do DATASUS no SGBD.',
@@ -263,7 +261,7 @@ def handle_request_rc(request):
 
 @swagger_auto_schema(
     methods=['GET'], operation_summary='Fornece dados do SR', operation_description='Fornece dados de acordo com os parâmetros informados.',
-    manual_parameters=[uf_param_get, month_param_get, year_param_get], responses={200: 'OK'}, tags=['CNES/SR']
+    manual_parameters=[uf_param_get, month_param_get, year_param_get, page_number_get], responses={200: 'OK'}, tags=['CNES/SR']
 )
 @swagger_auto_schema(
     methods=['POST'], operation_summary='Insere arquivo do SR', operation_description='Baixa e insere os dados de um arquivo do DATASUS no SGBD.',

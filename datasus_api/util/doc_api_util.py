@@ -71,6 +71,15 @@ year_param_get = openapi.Parameter(
     max_length=4
 )
 
+page_number_get = openapi.Parameter(
+    name='page',
+    in_=openapi.IN_QUERY,
+    type=openapi.TYPE_INTEGER,
+    description='Número da página',
+    required=False,
+    min_length=1
+)
+
 uf_param_delete = openapi.Parameter(
     name='uf',
     in_=openapi.IN_QUERY,
@@ -109,7 +118,7 @@ db_name_param_get = openapi.Parameter(
     description='Sigla da base de dados',
     required=True,
     min_length=2,
-    max_length=4
+    max_length=12
 )
 
 table_name_param_get = openapi.Parameter(
@@ -119,5 +128,5 @@ table_name_param_get = openapi.Parameter(
     description='Sigla da tabela',
     required=True,
     min_length=2,
-    max_length=4
+    max_length=6
 )
