@@ -12,32 +12,32 @@ Para execução do sistema utlizando Docker, esse repositório disponibiliza um 
 
 Para executar o sistema localmente, siga as instruções abaixo:
 
-1. Clone este repositório:`<br/>
+1. Clone este repositório:<br/>
 `git clone <url_do_repositorio>`
 <br/>
 
-2. Navegue para o diretório raiz do projeto:`<br/>
+2. Navegue para o diretório raiz do projeto:<br/>
 `cd datasus_api`
 <br/>
 
 3. Gere um arquivo `.env` no diretório raiz (existe um arquivo `.env.example` no diretório raiz exemplificando as constantes que devem ser definidas).
 <br/> 
 
-4. Gere um ambiente python:`<br/>
+4. Gere um ambiente python:<br/>
 `python3 -m venv .venv`
 <br/>
 
-5. Ative o ambiente python:`<br/>
+5. Ative o ambiente python:<br/>
 `source .venv/bin/activate`
 <br/>
 
-6. Instale as dependências:`<br/>
+6. Instale as dependências:<br/>
 `pip install -r requirements.txt`
 
 ### Uso
 
-1. Execute as migrações do banco de dados:`<br/>
-`python3 manage.py makemigrations`<br/>
+1. Execute as migrações do banco de dados:<br/>
+`python3 manage.py makemigrations<br/>
 `python3 manage.py migrate`
 <br/>
 
