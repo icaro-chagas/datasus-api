@@ -2,6 +2,7 @@ from ..models.sihsus.er import ERSihsus
 from ..models.sihsus.rd import RDSihsus
 from ..models.sihsus.rj import RJSihsus
 from ..models.sihsus.sp import SPSihsus
+from ..models.file_metadata import FileMetadata
 from ..serializers.serializers_sihsus import ERSerializer, RDSerializer, RJSerializer, SPSializer
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
