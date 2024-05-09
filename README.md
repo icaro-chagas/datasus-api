@@ -37,7 +37,7 @@ Para executar o sistema localmente, siga as instruções abaixo:
 ### Uso
 
 1. Execute as migrações do banco de dados:<br/>
-`python3 manage.py makemigrations<br/>
+`python3 manage.py makemigrations`<br/>
 `python3 manage.py migrate`
 <br/>
 
