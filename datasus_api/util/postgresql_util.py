@@ -10,7 +10,7 @@ import time
 logger = logging.getLogger()
 
 STORAGE_PATH = './datasus_api/util/tmp/'
-#STORAGE_PATH = '/app/datasus_api/util/' # Docker path
+#STORAGE_PATH = '/app/datasus_api/util/tmp/' # Docker path
 
 class OperationType(enum.Enum):
     CREATE_TABLE = 1

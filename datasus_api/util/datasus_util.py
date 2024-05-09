@@ -12,7 +12,7 @@ from time import sleep
 logger=logging.getLogger()
 
 STORAGE_PATH = './datasus_api/util/tmp/'
-#STORAGE_PATH = '/app/datasus_api/util/' # Docker path
+#STORAGE_PATH = '/app/datasus_api/util/tmp/' # Docker path
 
 def run_function_with_timeout(target_function, args=(), timeout_seconds=60):
 

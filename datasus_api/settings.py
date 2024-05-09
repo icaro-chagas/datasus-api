@@ -90,8 +90,6 @@ DATABASES = {
         'NAME': os.environ.get('DB_NAME'), 
         'USER': os.environ.get('DB_USER'),
         'PASSWORD': os.environ.get('DB_PASSWORD'),
-        'HOST': 'db', # 'db' is the name of the service in the docker-compose file
-        #'HOST': 'postgres_container',
         'HOST': os.environ.get('DB_HOST'), 
         'PORT': os.environ.get('DB_PORT'),
     }
